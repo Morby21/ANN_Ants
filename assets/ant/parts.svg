@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 210 297"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
+   sodipodi:docname="drawing.svg">
+  <defs
+     id="defs2">
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter953">
+      <feGaussianBlur
+         stdDeviation="0.1 0.1"
+         result="blur"
+         id="feGaussianBlur951" />
+    </filter>
+    <filter
+       style="color-interpolation-filters:sRGB;"
+       inkscape:label="Blur"
+       id="filter957">
+      <feGaussianBlur
+         stdDeviation="0.1 0.1"
+         result="blur"
+         id="feGaussianBlur955" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.087500002"
+     inkscape:cx="-4093.6139"
+     inkscape:cy="946.13482"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     showborder="false"
+     inkscape:snap-global="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="706"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     style="display:inline"
+     sodipodi:insensitive="true">
+    <rect
+       style="opacity:1;fill:#916f6f;fill-opacity:0.69696966;stroke:#000000;stroke-width:13.16499996;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers fill stroke"
+       id="rect906"
+       width="725.71429"
+       height="725.71429"
+       x="-1590.5237"
+       y="-428.71423"
+       rx="35.529835"
+       ry="35.529835" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Layer 2"
+     style="display:inline;opacity:1">
+    <path
+       sodipodi:nodetypes="cccc"
+       inkscape:connector-curvature="0"
+       id="path969"
+       d="m -1211.004,22.532123 c 3.7299,0.43817 7.3941,2.66457 9.0008,4.37892 -1.3233,6.93893 -5.4717,5.48297 -9.3592,5.08622 -2.3911,-3.15505 -1.8761,-6.31009 0.3584,-9.46514 z"
+       style="fill:#000000;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\2-1_lowerLeg.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <g
+       id="g900"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806">
+      <path
+         inkscape:export-ydpi="46.692806"
+         inkscape:export-xdpi="46.692806"
+         inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\claw.png"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m -1119.6958,-73.417599 c 0.4663,-3.69503 3.1784,-6.45434 5.7129,-9.28762 -0.6096,1.84788 -1.6035,3.79184 -1.5702,5.47903 2.7957,-0.96571 5.0869,-1.39322 6.5481,-0.93545 -2.2481,0.92256 -4.668,3.39184 -7.1829,6.71515 z"
+         id="path963"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="cccccc" />
+      <path
+         inkscape:export-ydpi="46.692806"
+         inkscape:export-xdpi="46.692806"
+         inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\upper_leg.png"
+         style="fill:#121212;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m -1170.1814,-54.983017 c 10.8924,-3.742642 32.6097,-1.781935 45.4745,-17.325467 3.8422,0.253254 2.9392,3.130909 2.9947,5.357648 -13.6636,10.445832 -30.2046,14.610349 -47.709,16.718238 -3.6837,-0.544105 -4.6354,-1.915974 -0.7602,-4.750419 z"
+         id="path965"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         inkscape:export-ydpi="46.692806"
+         inkscape:export-xdpi="46.692806"
+         inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\lower_leg.png"
+         style="fill:#1a1a1a;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m -1204.5537,-40.259599 c 8.4836,-2.580372 16.2498,-6.678948 24.6614,-11.395982 4.5505,-0.55175 4.4367,2.167654 2.5226,4.179006 -12.5978,9.657836 -17.21,8.596055 -28.3728,12.309343 -3.0851,-1.975771 -1.5411,-3.581427 1.1888,-5.092367 z"
+         id="path967"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccc" />
+      <path
+         inkscape:export-ydpi="46.692806"
+         inkscape:export-xdpi="46.692806"
+         inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\1_lowerLeg.png"
+         style="fill:#000000;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m -1220.3212,-29.920186 c 5.3629,0.53185 9.6799,-0.43965 9.8889,-4.27632 -3.3552,0.34198 -2.2016,-2.18843 -2.372,-3.8754 -1.6243,-0.0259 -3.2924,-0.8156 -4.8108,1.00226 -1.8238,1.97494 -5.2105,3.96264 -2.7061,7.14946 z"
+         id="path971"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccc" />
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       id="path975"
+       d="m -1243.5414,-37.771228 c -14.0975,4.55204 -4.4961,22.30627 -4.7248,22.23691 l 3.2127,5.09356 c 2.275,1.43891 4.5499,2.07845 6.8249,2.05553 2.275,0.0229 4.5499,-0.61662 6.8249,-2.05553 l 3.2127,-5.09356 c -0.2287,0.0694 9.3727,-17.68486 -4.7247,-22.23691 l -5.3129,0.0461 z"
+       style="fill:#1a1a1a;stroke:none;stroke-width:0.10181689;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\neck1.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       sodipodi:nodetypes="szszs"
+       inkscape:connector-curvature="0"
+       id="path977"
+       d="m -1229.6807,13.590102 c 0,9.96783 -1.5244,18.04836 -9.6856,18.04836 -8.1612,0 -9.6857,-8.08053 -9.6857,-18.04836 0,-9.96783 -3.5782,-19.08779 9.6857,-19.08779 13.2639,0 9.6856,9.11996 9.6856,19.08779 z"
+       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.26499999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\neck2.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <g
+       id="g886"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806">
+      <g
+         id="g881">
+        <path
+           style="fill:#000000;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m -1220.5251,-122.70231 c 2.053,-8.31969 4.5318,-16.5002 4.5604,-25.63893 -0.2841,-3.68903 -2.865,-16.27296 0.1316,-18.08334 2.9726,1.1048 3.6164,12.66323 3.8948,20.46945 -0.1951,8.95404 -3.2854,16.02548 -5.2762,23.3429 -2.6328,3.44545 -2.9216,0.88752 -3.3106,-0.0901 z"
+           id="path961"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="cccccc"
+           inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\upper_antena.png"
+           inkscape:export-xdpi="46.692806"
+           inkscape:export-ydpi="46.692806" />
+        <path
+           style="fill:#1a1a1a;stroke:none;stroke-width:0.18297614px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="m -1223.5927,-82.257258 c 1.1087,-10.106984 5.5481,-18.964402 3.2269,-30.863932 -1.043,-4.11529 2.5549,-6.95676 3.973,0.62588 2.1965,5.51998 -3.7387,25.232407 -5.6566,30.640448 z"
+           id="path981"
+           inkscape:connector-curvature="0"
+           sodipodi:nodetypes="ccccc"
+           inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\lower_atena.png"
+           inkscape:export-xdpi="46.692806"
+           inkscape:export-ydpi="46.692806" />
+      </g>
+    </g>
+    <path
+       sodipodi:nodetypes="sssss"
+       inkscape:connector-curvature="0"
+       id="path983"
+       d="m -1220.4176,-49.496393 c -0.971,11.250845 -7.5675,7.242244 -17.5729,7.082642 -9.9498,-0.158713 -17.3472,5.089613 -17.8403,-7.082642 -0.4276,-10.554921 1.6587,-26.471268 17.7066,-26.326049 16.9077,0.152998 18.5891,16.102198 17.7066,26.326049 z"
+       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.75171071;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\head.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <ellipse
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.86549866;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       id="ellipse991"
+       cx="-1287.7328"
+       cy="-127.468"
+       rx="4.2763124"
+       ry="5.4056396"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\eye.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       sodipodi:nodetypes="szszs"
+       inkscape:connector-curvature="0"
+       id="path993"
+       d="m -1212.3948,78.220228 c 0,18.735351 -16.8776,33.356412 -24.9112,33.356402 -8.0337,0 -24.9112,-14.621051 -24.9112,-33.356402 0,-18.735352 5.385,-34.190632 24.9112,-33.923362 19.5262,0.26727 24.9112,15.18801 24.9112,33.923362 z"
+       style="opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:0.34917495;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\stomach.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path995"
+       d="m -1236.996,65.999798 c -8.3668,0.0125 -16.6408,1.37449 -24.8254,4.04679 -0.2724,2.62303 -0.3958,5.36062 -0.3958,8.17366 0,3.64006 0.6394,7.1237 1.7249,10.37611 15.5477,2.36638 30.9893,1.86286 46.3796,-0.0202 1.0814,-3.2466 1.7178,-6.72347 1.7178,-10.35596 0,-2.96533 -0.1363,-5.83413 -0.4408,-8.56537 -8.1382,-2.45597 -16.1912,-3.66696 -24.1603,-3.65507 z"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\stomach.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       inkscape:connector-curvature="0"
+       id="path997"
+       d="m -1249.555,105.21705 c 4.4004,4.01199 9.033,6.35982 12.2489,6.35982 3.2108,0 7.8336,-2.34042 12.2277,-6.3407 -8.2014,0.37683 -16.3906,0.64322 -24.4766,-0.0191 z"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\stomach.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       inkscape:export-ydpi="46.692806"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\mouth.png"
+       sodipodi:nodetypes="sssss"
+       inkscape:connector-curvature="0"
+       id="path884"
+       d="m -1281.3862,-108.77138 c -0.025,0.82156 -2.0681,1.58277 -3.8034,1.58277 -1.7352,0 -5.4671,3.44333 -5.5043,2.62221 -0.21,-4.64582 3.834,-7.95214 8.4336,-7.29967 2.3233,0.32956 0.9002,2.25099 0.8741,3.09469 z"
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.76499999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill" />
+    <circle
+       style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.02903586;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+       id="path906"
+       cx="-1299.2743"
+       cy="-127.53087"
+       r="1.1181936"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       inkscape:export-ydpi="46.692806"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\2-1_lowerLeg.png"
+       style="fill:#000000;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1270.0782,14.972599 c -3.7299,0.43817 -7.3941,2.66457 -9.0008,4.37892 1.3233,6.93893 5.4717,5.48297 9.3592,5.08622 2.3911,-3.15505 1.8761,-6.31009 -0.3584,-9.46514 z"
+       id="path877"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc" />
+    <g
+       id="g894"
+       transform="matrix(-1,0,0,1,-2470.8106,2.1381562)"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806">
+      <g
+         id="g892">
+        <path
+           inkscape:export-ydpi="46.692806"
+           inkscape:export-xdpi="46.692806"
+           inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\upper_antena.png"
+           sodipodi:nodetypes="cccccc"
+           inkscape:connector-curvature="0"
+           id="path888"
+           d="m -1220.5251,-122.70231 c 2.053,-8.31969 4.5318,-16.5002 4.5604,-25.63893 -0.2841,-3.68903 -2.865,-16.27296 0.1316,-18.08334 2.9726,1.1048 3.6164,12.66323 3.8948,20.46945 -0.1951,8.95404 -3.2854,16.02548 -5.2762,23.3429 -2.6328,3.44545 -2.9216,0.88752 -3.3106,-0.0901 z"
+           style="fill:#000000;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+        <path
+           inkscape:export-ydpi="46.692806"
+           inkscape:export-xdpi="46.692806"
+           inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\lower_atena.png"
+           sodipodi:nodetypes="ccccc"
+           inkscape:connector-curvature="0"
+           id="path890"
+           d="m -1223.5927,-82.257258 c 1.1087,-10.106984 5.5481,-18.964402 3.2269,-30.863932 -1.043,-4.11529 2.5549,-6.95676 3.973,0.62588 2.1965,5.51998 -3.7387,25.232407 -5.6566,30.640448 z"
+           style="fill:#1a1a1a;stroke:none;stroke-width:0.18297614px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
+      </g>
+    </g>
+    <g
+       id="g911"
+       transform="translate(4.9136905,38.175595)"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806">
+      <path
+         sodipodi:nodetypes="cccccc"
+         inkscape:connector-curvature="0"
+         id="path902"
+         d="m -1119.6958,-73.417599 c 0.4663,-3.69503 3.1784,-6.45434 5.7129,-9.28762 -0.6096,1.84788 -1.6035,3.79184 -1.5702,5.47903 2.7957,-0.96571 5.0869,-1.39322 6.5481,-0.93545 -2.2481,0.92256 -4.668,3.39184 -7.1829,6.71515 z"
+         style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\claw.png"
+         inkscape:export-xdpi="46.692806"
+         inkscape:export-ydpi="46.692806" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path904"
+         d="m -1170.1814,-54.983017 c 10.8924,-3.742642 32.6097,-1.781935 45.4745,-17.325467 3.8422,0.253254 2.9392,3.130909 2.9947,5.357648 -13.6636,10.445832 -30.2046,14.610349 -47.709,16.718238 -3.6837,-0.544105 -4.6354,-1.915974 -0.7602,-4.750419 z"
+         style="fill:#121212;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\upper_leg.png"
+         inkscape:export-xdpi="46.692806"
+         inkscape:export-ydpi="46.692806" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path907"
+         d="m -1204.5537,-40.259599 c 8.4836,-2.580372 16.2498,-6.678948 24.6614,-11.395982 4.5505,-0.55175 4.4367,2.167654 2.5226,4.179006 -12.5978,9.657836 -17.21,8.596055 -28.3728,12.309343 -3.0851,-1.975771 -1.5411,-3.581427 1.1888,-5.092367 z"
+         style="fill:#1a1a1a;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\lower_leg.png"
+         inkscape:export-xdpi="46.692806"
+         inkscape:export-ydpi="46.692806" />
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="path909"
+         d="m -1220.3212,-29.920186 c 5.3629,0.53185 9.6799,-0.43965 9.8889,-4.27632 -3.3552,0.34198 -2.2016,-2.18843 -2.372,-3.8754 -1.6243,-0.0259 -3.2924,-0.8156 -4.8108,1.00226 -1.8238,1.97494 -5.2105,3.96264 -2.7061,7.14946 z"
+         style="fill:#000000;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\1_lowerLeg.png"
+         inkscape:export-xdpi="46.692806"
+         inkscape:export-ydpi="46.692806" />
+    </g>
+    <path
+       inkscape:export-ydpi="46.692806"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\claw.png"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1365.113,-82.489028 c -0.4663,-3.69503 -3.1784,-6.45434 -5.7129,-9.28762 0.6096,1.84788 1.6035,3.79184 1.5702,5.47903 -2.7957,-0.96571 -5.0869,-1.39322 -6.5481,-0.93545 2.2481,0.92256 4.668,3.39184 7.1829,6.71515 z"
+       id="path915"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="46.692806"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\upper_leg.png"
+       style="fill:#121212;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1314.6274,-64.054446 c -10.8924,-3.742642 -32.6097,-1.781935 -45.4745,-17.325467 -3.8422,0.253254 -2.9392,3.130909 -2.9947,5.357648 13.6636,10.445832 30.2046,14.610349 47.709,16.718238 3.6837,-0.544105 4.6354,-1.915974 0.7602,-4.750419 z"
+       id="path917"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       inkscape:export-ydpi="46.692806"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\lower_leg.png"
+       style="fill:#1a1a1a;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1280.2551,-49.331028 c -8.4836,-2.580372 -16.2498,-6.678948 -24.6614,-11.395982 -4.5505,-0.55175 -4.4367,2.167654 -2.5226,4.179006 12.5978,9.657836 17.21,8.596055 28.3728,12.309343 3.0851,-1.975771 1.5411,-3.581427 -1.1888,-5.092367 z"
+       id="path919"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       inkscape:export-ydpi="46.692806"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\1_lowerLeg.png"
+       style="fill:#000000;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1264.4876,-38.991615 c -5.3629,0.53185 -9.6799,-0.43965 -9.8889,-4.27632 3.3552,0.34198 2.2016,-2.18843 2.372,-3.8754 1.6243,-0.0259 3.2924,-0.8156 4.8108,1.00226 1.8238,1.97494 5.2105,3.96264 2.7061,7.14946 z"
+       id="path921"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path925"
+       d="m -1370.0267,-44.313432 c -0.4663,-3.69503 -3.1784,-6.45434 -5.7129,-9.28762 0.6096,1.84788 1.6035,3.79184 1.5702,5.47903 -2.7957,-0.96571 -5.0869,-1.39322 -6.5481,-0.93545 2.2481,0.92256 4.668,3.39184 7.1829,6.71515 z"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\claw.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path927"
+       d="m -1319.5411,-25.87885 c -10.8924,-3.742642 -32.6097,-1.781935 -45.4745,-17.325467 -3.8422,0.253254 -2.9392,3.130909 -2.9947,5.357648 13.6636,10.445832 30.2046,14.610349 47.709,16.718238 3.6837,-0.544105 4.6354,-1.915974 0.7602,-4.750419 z"
+       style="fill:#121212;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\upper_leg.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path929"
+       d="m -1285.1688,-11.155432 c -8.4836,-2.580372 -16.2498,-6.678948 -24.6614,-11.395982 -4.5505,-0.55175 -4.4367,2.167654 -2.5226,4.179006 12.5978,9.657836 17.21,8.596055 28.3728,12.309343 3.0851,-1.975771 1.5411,-3.581427 -1.1888,-5.092367 z"
+       style="fill:#1a1a1a;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\lower_leg.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path931"
+       d="m -1269.4013,-0.816019 c -5.3629,0.53185 -9.6799,-0.43965 -9.8889,-4.27632 3.3552,0.34198 2.2016,-2.18843 2.372,-3.8754 1.6243,-0.0259 3.2924,-0.8156 4.8108,1.00226 1.8238,1.97494 5.2105,3.96264 2.7061,7.14946 z"
+       style="fill:#000000;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\1_lowerLeg.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       inkscape:export-ydpi="46.692806"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\claw.png"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1370.4047,-12.563432 c -0.4663,-3.69503 -3.1784,-6.45434 -5.7129,-9.28762 0.6096,1.84788 1.6035,3.79184 1.5702,5.47903 -2.7957,-0.96571 -5.0869,-1.39322 -6.5481,-0.93545 2.2481,0.92256 4.668,3.39184 7.1829,6.71515 z"
+       id="path939"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       inkscape:export-ydpi="46.692806"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\upper_leg.png"
+       style="fill:#121212;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1319.9191,5.87115 c -10.8924,-3.742642 -32.6097,-1.781935 -45.4745,-17.325467 -3.8422,0.253254 -2.9392,3.130909 -2.9947,5.357648 13.6636,10.445832 30.2046,14.610349 47.709,16.718238 3.6837,-0.544105 4.6354,-1.915974 0.7602,-4.750419 z"
+       id="path941"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       inkscape:export-ydpi="46.692806"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\lower_leg.png"
+       style="fill:#1a1a1a;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m -1285.5468,20.594568 c -8.4836,-2.580372 -16.2498,-6.678948 -24.6614,-11.395982 -4.5505,-0.55175 -4.4367,2.167654 -2.5226,4.179006 12.5978,9.657836 17.21,8.596055 28.3728,12.309343 3.0851,-1.975771 1.5411,-3.581427 -1.1888,-5.092367 z"
+       id="path943"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccc" />
+    <path
+       sodipodi:nodetypes="cccccc"
+       inkscape:connector-curvature="0"
+       id="path945"
+       d="m -1106.249,-5.0039082 c 0.4663,-3.69503 3.1784,-6.4543398 5.7129,-9.2876198 -0.6096,1.84788 -1.6035,3.79184 -1.5702,5.4790298 2.7957,-0.96571 5.0869,-1.3932198 6.5481,-0.93545 -2.2481,0.92256 -4.668,3.39184 -7.1829,6.71515 z"
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\claw.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path947"
+       d="m -1156.7346,13.430674 c 10.8924,-3.7426422 32.6097,-1.781935 45.4745,-17.3254672 3.8422,0.253254 2.9392,3.13090902 2.9947,5.357648 -13.6636,10.4458322 -30.2046,14.6103492 -47.709,16.7182382 -3.6837,-0.544105 -4.6354,-1.915974 -0.7602,-4.750419 z"
+       style="fill:#121212;fill-opacity:1;stroke:#000000;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\upper_leg.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+    <path
+       sodipodi:nodetypes="ccccc"
+       inkscape:connector-curvature="0"
+       id="path949"
+       d="m -1191.1069,28.154092 c 8.4836,-2.580372 16.2498,-6.678948 24.6614,-11.395982 4.5505,-0.55175 4.4367,2.167654 2.5226,4.179006 -12.5978,9.657836 -17.21,8.596055 -28.3728,12.309343 -3.0851,-1.975771 -1.5411,-3.581427 1.1888,-5.092367 z"
+       style="fill:#1a1a1a;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       inkscape:export-filename="E:\workspace\game\imp\ants\ants\parts\lower_leg.png"
+       inkscape:export-xdpi="46.692806"
+       inkscape:export-ydpi="46.692806" />
+  </g>
+</svg>
