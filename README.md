@@ -1,8 +1,8 @@
 # ANN Ants
-Artificial Neural Network - Ants - Game
+`Artificial Neural Network` - Ants - Game
 
 # Sources
-`CODE`  
+<b>CODE</b>  
 The neural network: https://github.com/leopnt/neft_godot  
 <b>ASSETS</b>  
 Ants Sprite: https://opengameart.org/content/walking-ant-with-parts-and-rigged-spriter-file#  
