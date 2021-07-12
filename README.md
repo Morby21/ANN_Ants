@@ -2,7 +2,7 @@
 Artificial Neural Network - Ants - Game
 
 # Sources
-´CODE´  
+`CODE`  
 The neural network: https://github.com/leopnt/neft_godot  
 ASSETS  
 Ants Sprite: https://opengameart.org/content/walking-ant-with-parts-and-rigged-spriter-file#  
