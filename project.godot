@@ -9,6 +9,26 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "HBoxContainer",
+"class": "ContributorClass",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/ContributorClass.gd"
+}, {
+"base": "PanelContainer",
+"class": "GistItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/GistItem.gd"
+}, {
+"base": "HBoxContainer",
+"class": "InvitationItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/InvitationItem.gd"
+}, {
+"base": "PanelContainer",
+"class": "RepositoryItem",
+"language": "GDScript",
+"path": "res://addons/github-integration/scripts/RepositoryItem.gd"
+}, {
 "base": "KinematicBody2D",
 "class": "TopCamera",
 "language": "GDScript",
@@ -20,6 +40,10 @@ _global_script_classes=[ {
 "path": "res://scripts/Camera2D.gd"
 } ]
 _global_script_class_icons={
+"ContributorClass": "",
+"GistItem": "",
+"InvitationItem": "",
+"RepositoryItem": "",
 "TopCamera": "",
 "ZoomingCamera2D": ""
 }
@@ -27,8 +51,15 @@ _global_script_class_icons={
 [application]
 
 config/name="ANN_Ants"
-run/main_scene="res://Game.tscn"
+run/main_scene="res://Game_MockUp.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+PluginSettings="*res://addons/github-integration/scripts/PluginSettings.gd"
+IconLoaderGithub="*res://addons/github-integration/scripts/IconLoaderGithub.gd"
+UserData="*res://addons/github-integration/scripts/user_data.gd"
+RestHandler="*res://addons/github-integration/scenes/RestHandler.tscn"
 
 [display]
 
@@ -36,6 +67,10 @@ window/size/width=1366
 window/size/height=768
 window/stretch/mode="2d"
 window/stretch/aspect="keep_width"
+
+[editor_plugins]
+
+enabled=PoolStringArray( "res://addons/Todo_Manager/plugin.cfg", "res://addons/github-integration/plugin.cfg" )
 
 [input]
 
@@ -71,6 +106,11 @@ Zoom_in={
 Zoom_out={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":5,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+mouseClick_left={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 

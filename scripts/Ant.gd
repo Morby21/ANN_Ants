@@ -1,8 +1,23 @@
 extends KinematicBody2D
 
+#var dragging = false
+#
+#signal dragsignal;
+
+### SetUp Options #############################################################
+onready var is_Option_Input_DistanceToNest = get_node("/root/Game_MockUp/MainMenu").Option_Input_DistanceToNest.pressed
+onready var is_Option_Input_Rotation = get_node("/root/Game_MockUp/MainMenu").Option_Input_Rotation.pressed
+onready var is_Option_Input_Coordinations  = get_node("/root/Game_MockUp/MainMenu").Option_Input_Coordinations.pressed
+onready var is_Option_Input_CollisionDetection = get_node("/root/Game_MockUp/MainMenu").Option_Input_CollisionDetection.pressed
+onready var is_Option_Input_TileDetection = get_node("/root/Game_MockUp/MainMenu").Option_Input_TileDetection.pressed
+onready var is_Option_lifeTimer = get_node("/root/Game_MockUp/MainMenu").Option_lifeTimer.pressed
+onready var val_Option_lifeTimer = get_node("/root/Game_MockUp/MainMenu").Option_value_lifeTimer.text.to_int()
+onready var is_Option_maxLifeTimer = get_node("/root/Game_MockUp/MainMenu").Option_maxLifeTimer.pressed
+onready var val_Option_maxLifeTimer = get_node("/root/Game_MockUp/MainMenu").Option_value_maxLifeTimer.text.to_int()
+
 #update_dirty_quadrants(tileMap)
-onready var Ants_World_Node = get_node("/root/Game/Ants_World")
-onready var AntsTileMap = get_node("/root/Game/Ants_World/TileMap")
+onready var Ants_World_Node = get_node("/root/Game_MockUp/Ants_World")
+onready var AntsTileMap = get_node("/root/Game_MockUp/Ants_World/TileMap")
 onready var life_timer : int = 0 
 onready var max_life_timer : int = 0 
 onready var spawn_timer : int = 0
@@ -17,6 +32,7 @@ var is_dead : bool = false #Ant isn't alive
 var is_ready:bool = false #Ant is finished learning and is ready for population
 var is_spawned:bool = true
 
+var worldPosition_ant
 var start_tile : Vector2 = Vector2(29, 14) #ants starting position on tileMap
 var mapPosition_ant #ants actual position on tileMap
 var mapPosition_ant_before #ants old position on tileMap
@@ -38,14 +54,60 @@ var inputs_written_2_und_3 : bool = false
 var ants_task : int #Actual task of the ant
 var distance_to_home
 
+var Organism = preload("res://neft_godot/scenes/Organism.tscn")
+var Organism_Instance
+var input_count = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	connect("dragsignal",self,"_set_drag_pc")
 	ants_task = 1 #Set ants starting Task to SEARCHING
 #	Ants_World_Node.connect("last_ants", self, "set_last_ants")
 	Ants_World_Node.connect("new_generation", self, "reset_last_ants")
+	
+	#!!!!!!!!! #print("Test", self.name)
+	
+	Organism_Instance = Organism.instance()
+	
+	if is_Option_Input_DistanceToNest:
+		input_count = input_count + 1
+	if is_Option_Input_Rotation:
+		input_count = input_count + 1
+	if is_Option_Input_Coordinations:
+		input_count = input_count + 2
+	if is_Option_Input_CollisionDetection:
+		input_count = input_count + 2
+	if is_Option_Input_TileDetection:
+		input_count = input_count + 2
+	
+	Organism_Instance.input_size = input_count
+	add_child(Organism_Instance)
+	
+
+	##########################
+#	input_pickable = true
+#
+#	connect("mouse_entered", self, "_on_mouse_entered")
+#	connect("mouse_exited", self, "_on_mouse_exited")
+#	connect("input_event", self, "_on_input_event")
+#
+#func _on_mouse_entered():
+#	print("mouse entered")
+#
+#func _on_mouse_exited():
+#	print("mouse exited")
+#
+#func _on_input_event(viewport, input_event, shape_idx):
+#	var mouse_event = input_event as InputEventMouseButton
+#	if mouse_event:
+#		prints("Mouse button clicked:", mouse_event.button_index)
 
 
 func _physics_process(_delta):
+#	if dragging:
+#		var mousepos = get_viewport().get_mouse_position()
+#		self.position = Vector2(mousepos.x, mousepos.y)
+#
 	if spawn:
 		if spawn_timer == 0:
 			respawn()
@@ -53,33 +115,40 @@ func _physics_process(_delta):
 	
 	if !is_dead: #"While" ant is living
 		inputs = [] #Reset Array
-		inputs_written_0_und_1 = false #Reset Array-Input-Bit
-		inputs_written_2_und_3 = false #Reset Array-Input-Bit
-		mapPosition_ant = AntsTileMap.world_to_map(self.position) #coordinates are divided through TileMap-Node's scale-factor
-		
+		worldPosition_ant = self.position
+		mapPosition_ant = AntsTileMap.world_to_map(self.position) 
 		distance_to_home = (self.position).distance_to(AntsTileMap.map_to_world(start_tile))
+#		print(worldPosition_ant)
+#		print("X: ", worldPosition_ant.x/5000)
+#		print("Y: ", worldPosition_ant.y/5000)
 		
-		inputs.insert(inputs.size(), distance_to_home/5000)
-		#print(distance_to_home/5000)
+		if is_Option_Input_DistanceToNest:
+			inputs.insert(inputs.size(), distance_to_home/5000) #TODO: vernümpftige Normalisierung implementieren (Input distance_to_home)
 		
-		inputs.insert(inputs.size(), normalizeRotation(self.rotation_degrees+180))
+		if is_Option_Input_Rotation:
+			inputs.insert(inputs.size(), normalizeRotation(self.rotation_degrees+180))
 		
-		life_timer = life_timer + 1
-		if life_timer == 3000: #ants "standard" living-cycle (possible to be resetted for good work)
-			killThisOrganism(1)
-			life_timer = 0
-			
-		max_life_timer = max_life_timer + 1
-		if max_life_timer == 15000:
-			killThisOrganism(1)
-			max_life_timer = 0
+		if is_Option_Input_Coordinations:
+			inputs.insert(inputs.size(), worldPosition_ant.x/5000) #TODO: vernümpftige Normalisierung implementieren (Input worldPosition X)
+			inputs.insert(inputs.size(), worldPosition_ant.y/5000) #TODO: vernümpftige Normalisierung implementieren (Input worldPosition Y)
+		
+		if is_Option_lifeTimer:
+			life_timer = life_timer + 1
+			if life_timer == val_Option_lifeTimer: #3000 #ants "standard" living-cycle (possible to be resetted for good work)
+				killThisOrganism(1)
+				life_timer = 0
+		
+		if is_Option_maxLifeTimer:
+			max_life_timer = max_life_timer + 1
+			if max_life_timer == val_Option_maxLifeTimer: #15000
+				killThisOrganism(1)
+				max_life_timer = 0
 			
 		match ants_task:
 			1:  #SEARCH Searching for ... new Areas and Things
 				searching()
-				scan_for_collision() #incl. inputs_written_0_und_1
-				#inputs_written_0_und_1 = true
-				scan_for_tiles() #incl. inputs_written_2_und_3
+				scan_for_collision() 
+				scan_for_tiles() 
 				kill_ant_for_cycling()
 				#kill_ant_for_cycling_ON_1tile()
 				#kill_ant_for_notMoving()
@@ -88,8 +157,7 @@ func _physics_process(_delta):
 			3:  #CARRY Carrying something back to home/nest/...
 				pass 
 		
-		if inputs_written_0_und_1 && inputs_written_2_und_3: #check input-array is filled
-			organism_IO() #steer-organism
+		organism_IO() #steer-organism
 
 
 func move_ant(direction) -> void:
@@ -141,10 +209,11 @@ func scan_for_collision() -> void:
 	var rightCollisionDistance : float = rightCollisionPoint.distance_to($antennae_right.get_global_transform().get_origin())
 	var antennae_right : float = normalizeDistance(rightCollisionDistance)
 	
-	#print(antennae_left, " - ", antennae_right)
-	inputs.insert(inputs.size(), antennae_left)
-	inputs.insert(inputs.size(), antennae_right)
-	inputs_written_0_und_1 = true
+	if is_Option_Input_CollisionDetection:
+		#print(leftCollisionDistance, " - ", rightCollisionDistance)
+		#print(antennae_left, " - ", antennae_right)
+		inputs.insert(inputs.size(), antennae_left)
+		inputs.insert(inputs.size(), antennae_right)
 
 
 func scan_for_tiles() -> void:
@@ -156,11 +225,11 @@ func scan_for_tiles() -> void:
 	var cell_index_rightAntennae = AntsTileMap.get_cellv(rightAntennae_mapPosition)
 	var normalizedTileIndex_rightAntennae  = normalizeTile(cell_index_rightAntennae)
 	
-	#print(normalizedTileIndex_leftAntennae, " - ", normalizedTileIndex_rightAntennae)
-	inputs.insert(inputs.size(), normalizedTileIndex_leftAntennae)
-	inputs.insert(inputs.size(), normalizedTileIndex_rightAntennae)
-	inputs_written_2_und_3 = true
-
+	if is_Option_Input_TileDetection:
+		#print(normalizedTileIndex_leftAntennae, " - ", normalizedTileIndex_rightAntennae)
+		inputs.insert(inputs.size(), normalizedTileIndex_leftAntennae)
+		inputs.insert(inputs.size(), normalizedTileIndex_rightAntennae)
+	
 
 func organism_IO():
 	var output:Array = [0]
@@ -199,6 +268,14 @@ func kill_ant_for_notMoving():
 func kill_ant_for_cycling():
 	if cycle_left_timer >= 300 || cycle_right_timer >= 300:
 		killThisOrganism(3)
+#		print(is_Option_Input_DistanceToNest)
+#		print(is_Option_Input_Rotation)
+#		print(is_Option_Input_CollisionDetection)
+#		print(is_Option_Input_TileDetection)
+#		print(is_Option_lifeTimer)
+#		print(val_Option_lifeTimer)
+#		print(is_Option_maxLifeTimer)
+#		print(val_Option_maxLifeTimer)
 		
 		
 #	if mapPosition_ant_before != mapPosition_ant: #check for new/old tiles
@@ -280,7 +357,7 @@ func trigger_respawn(given_spawn_timer) -> void:
 
 func killThisOrganism(kill_reason:int) -> void:
 	$AnimatedSprite.stop()
-	if true: #last_ants == true:
+	if false: #last_ants == true:
 		if kill_reason == 1:
 			print(self.name, " has killed over Time. (Fitness: ", $Organism.get_fitness(),")")
 		elif kill_reason == 2:
@@ -299,9 +376,9 @@ func killThisOrganism(kill_reason:int) -> void:
 	
 	
 func normalizeDistance(distanceToNormalize : float) -> float:
-	if distanceToNormalize > 2:
+	if distanceToNormalize > 100:
 		return 1.0
-	return distanceToNormalize / 2
+	return distanceToNormalize / 100
 
 
 func normalizeTile(tile_index : float) -> float:
@@ -339,4 +416,19 @@ func normalizeRotation(ants_rotation : float) -> float:
 #4. Change the other members of the populations with less fitness, so that they have the acceptable level of fitness as set by you based on some predefined goals.
 #5. kill from the network those members with still lesser fitness level after step 4
 #6. repeat step 2 until you maximize your network.
-#Hope this helps
+##Hope this helps
+
+#func _set_drag_pc():
+#	dragging=!dragging
+#
+#
+#func _on_KinematicBody2D_input_event(viewport, event, shape_idx):
+#	if event is InputEventMouseButton:
+#		print("signal input event - is mouse button")
+#		if event.button_index == BUTTON_LEFT and event.pressed:
+#			emit_signal("dragsignal")
+#		elif event.button_index == BUTTON_LEFT and !event.pressed:
+#			emit_signal("dragsignal")
+#	elif event is InputEventScreenTouch:
+#		if event.pressed and event.get_index() == 0:
+#			self.position = event.get_position()

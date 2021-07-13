@@ -8,7 +8,6 @@ signal spawned_ants_label(a)
 signal game_paused_byScript()
 
 var everybody_ready = false
-var delta_timer : int
 var spawn_timer : int
 #var ant_count = false
 var spawned_ants
@@ -18,25 +17,12 @@ var gen_count = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	delta_timer = 0
+	$CanvasLayer/GUI.spawned_ants_max = $Population.size
 	spawn_timer = 0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
-	delta_timer = delta_timer + 1
-	if delta_timer == 9000: #"Time" until "used" tiles are resetted
-		delta_timer = 0
-		tile_reset()
-	
-	
-#	for child in $Population.get_children():
-#
-#		var testPointLeft = child.get_node("antenaes").get_global_transform().origin+child.get_node("antenaes").points[0].rotated(rotation)*0.5
-#		var testPointRight = child.get_node("antenaes").get_global_transform().origin+child.get_node("antenaes").points[2].rotated(rotation)*0.5
-#		draw_line(testPointLeft, testPointRight, Color("#ffb2d90a") )
-	
-	
 	everybody_ready = true
 	for child in $Population.get_children():
 		if !child.get_is_ready():
@@ -105,9 +91,25 @@ func _on_GUI_btn_KillAllAnts_pressed():
 
 
 func _on_GUI_btn_Pause_pressed():
-		get_tree().paused = true
+	get_tree().paused = true
 
 
 func _on_GUI_btn_Continue_pressed():
-		get_tree().paused = false
+	get_tree().paused = false
 
+#############################################################################
+#https://godotengine.org/qa/7983/private-vars-inside-custom-godot-script-class
+#var my_good_private_x = 6 setget private_gs,private_gs
+#var my_better_private_y = 9 setget private_gs,private_gs
+#
+#func private_gs(val = null): 
+#    # Using a default value to make it possible to call with both 1 and 0 arguments (e.g. both as setter and getter)
+#    print("Access to private variable!!!")
+#    print_stack()
+#    pass # No set, no get for you!
+#
+## Usage:
+#func _ready():
+#    my_good_private_x = 54 # works!
+#    print(my_good_private_x) # 54
+#    self.my_better_private_y = 23 # migth work, depends on which version of godot you use

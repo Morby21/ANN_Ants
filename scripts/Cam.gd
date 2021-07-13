@@ -1,4 +1,3 @@
-# Ship that rotates and moves forward, similar to classics like Asteroid.
 class_name TopCamera
 extends KinematicBody2D
 
