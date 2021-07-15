@@ -51,12 +51,17 @@ func _on_Ants_World_spawned_ants_label(spawned_ants):
 func _on_Btn_PauseContinue2_pressed():
 	if Btn_PauseContinue.text == "Pause":
 		Btn_PauseContinue.text = "Continue"
-		emit_signal("btn_Pause_pressed")
+		get_tree().paused = true
+
 	else:
 		Btn_PauseContinue.text = "Pause"
-		emit_signal("btn_Continue_pressed")
+		get_tree().paused = false
 
 
 func _on_Ants_World_game_paused_byScript():
 	Btn_PauseContinue.text = "Continue"
 
+
+
+func _on_Btn_Menu_pressed():
+	Global.Menu_Button()

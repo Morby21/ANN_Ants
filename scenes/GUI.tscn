@@ -142,3 +142,4 @@ text = "Menu"
 
 [connection signal="pressed" from="Top/Top_Right/Btn_KillAllAnts2" to="." method="_on_Btn_KillAllAnts2_pressed"]
 [connection signal="pressed" from="Top/Top_Right/Btn_PauseContinue" to="." method="_on_Btn_PauseContinue2_pressed"]
+[connection signal="pressed" from="Top/Top_Right/Btn_Menu" to="." method="_on_Btn_Menu_pressed"]

@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
 ### SetUp Options #############################################################
-onready var node_MainMenu = get_node("/root/Game_MockUp/MainMenu")
+onready var node_MainMenu = get_node("/root/MainMenu")
 
 onready var is_Option_Input_DistanceToNest = node_MainMenu.Option_Input_DistanceToNest.pressed
 onready var is_Option_Input_Rotation = node_MainMenu.Option_Input_Rotation.pressed
@@ -18,8 +18,7 @@ onready var is_Option_maxLifeTimer = node_MainMenu.Option_maxLifeTimer.pressed
 onready var val_Option_maxLifeTimer = node_MainMenu.Option_value_maxLifeTimer.text.to_int()
 ###############################################################################
 
-onready var Ants_World_Node = get_node("/root/Game_MockUp/Ants_World")
-onready var AntsTileMap = get_node("/root/Game_MockUp/Ants_World/TileMap")
+onready var AntsTileMap = get_node("/root/Ants_World/TileMap")
 
 export(Array, int, 1, 100) var hidden_layers_sizes:Array = [6, 3]
 
@@ -54,7 +53,6 @@ var inputs:Array = []
 var inputs_written_0_und_1 : bool = false
 var inputs_written_2_und_3 : bool = false
 
-#var last_ants : bool
 var ants_task : int #Actual task of the ant
 var distance_to_home
 
@@ -65,10 +63,6 @@ var input_count = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ants_task = 1 #Set ants starting Task to SEARCHING
-#	Ants_World_Node.connect("last_ants", self, "set_last_ants")
-	Ants_World_Node.connect("new_generation", self, "reset_last_ants")
-	
-	#!!!!!!!!! #print("Test", self.name)
 	
 	### SetUp instance of Organism ############################################
 	Organism_Instance = Organism.instance()
@@ -90,12 +84,12 @@ func _ready():
 		var layer1:int = int(ceil((input_count+1)/3*2)) #+1 for one output. #HACK: Formel doesn't work right (maybe does...confused becaused the +1, so check again later)
 		var layer2:int = int(ceil(layer1/2))
 		hidden_layers_sizes = [layer1, layer2]
-		print(hidden_layers_sizes)
-	else:
+		#print(hidden_layers_sizes)
+	else: #FIXME whole else doesn't work
 		var hiddenLayerStringArray = val_Option_value_HiddenLayerSizes.split(",")
 		for layerAsString in hiddenLayerStringArray:
 			hidden_layers_sizes.append(int(layerAsString))
-		print(hidden_layers_sizes)
+		#print(hidden_layers_sizes)
 
 	
 	Organism_Instance.hidden_layers_sizes = hidden_layers_sizes
@@ -316,14 +310,6 @@ func get_is_ready() -> bool:
 func get_is_spawned() -> bool:
 	return is_spawned
 
-#func set_last_ants():
-#	last_ants = true
-
-
-func reset_last_ants():
-	pass
-#	last_ants = false
-
 
 func reset() -> void:
 #	var min_rotation = 0
@@ -349,7 +335,7 @@ func trigger_respawn(given_spawn_timer) -> void:
 
 func killThisOrganism(kill_reason:int) -> void:
 	$AnimatedSprite.stop()
-	if false: #last_ants == true:
+	if false: #var == true:
 		if kill_reason == 1:
 			print(self.name, " has killed over Time. (Fitness: ", $Organism.get_fitness(),")")
 		elif kill_reason == 2:

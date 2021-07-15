@@ -27,14 +27,13 @@ _global_script_class_icons={
 [application]
 
 config/name="ANN_Ants"
-run/main_scene="res://Game_MockUp.tscn"
+run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
 
-Global="*res://Global.gd"
-GlobalVar="*res://Global_var.gd"
-GlobalSceneControl="*res://Global_sceneControl.gd"
+Global="*res://scripts/Global.gd"
+GlobalSceneControl="*res://scripts/Global_sceneControl.gd"
 
 [display]
 

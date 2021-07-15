@@ -1,7 +1,7 @@
 extends MarginContainer
 
-signal MainMenu_Continue_pressed
-signal MainMenu_NewGame_pressed
+#signal MainMenu_Continue_pressed
+#signal MainMenu_NewGame_pressed
 
 var mouseOn_Continue = false
 var mouseOn_NewGame = false
@@ -39,9 +39,11 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("mouseClick_left"):
 		if mouseOn_Continue == true:
-			emit_signal("MainMenu_Continue_pressed")
+			#emit_signal("MainMenu_Continue_pressed")
+			Global.Continue_pressed()
 		if mouseOn_NewGame == true:
-			emit_signal("MainMenu_NewGame_pressed")
+			#emit_signal("MainMenu_NewGame_pressed")
+			Global.NewGame_pressed()
 		if mouseOn_Options == true:
 			if is_options:
 				options_container.hide()

@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 signal last_ants
 signal new_generation
@@ -17,8 +17,9 @@ var gen_count = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$CanvasLayer/GUI.spawned_ants_max = $Population.size
-	spawn_timer = 0
+	pass
+	#$CanvasLayer/GUI.spawned_ants_max = $Population.size
+	#spawn_timer = 0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -29,9 +30,9 @@ func _physics_process(_delta):
 			# at least one child is not ready
 			everybody_ready = false
 			break
-
+	
 	print_population_status() # !Call before var everybody_ready is resetted
-
+	
 	if everybody_ready:
 		emit_signal("new_generation")
 		$Population.next_generation()
@@ -44,16 +45,16 @@ func _physics_process(_delta):
 			ant.trigger_respawn(spawn_timer)
 #			ant_count = false
 			spawn_timer = spawn_timer + 30
-		tile_reset()
-
+		#tile_reset() #TODO path to tile_reset()
+		
 #		if gen_count == 50:
 #			get_tree().paused = true
 #			emit_signal("game_paused_byScript")
 
 
-func tile_reset():
-	for tile in $TileMap.get_used_cells_by_id(3):
-		$TileMap.set_cellv(tile, 2)
+#func tile_reset():
+#	for tile in $TileMap.get_used_cells_by_id(3):
+#		$TileMap.set_cellv(tile, 2)
 
 
 func print_population_status():
@@ -64,6 +65,7 @@ func print_population_status():
 			spawned_ants = spawned_ants +1
 		if !child.is_dead:
 			living_ants = living_ants +1
+	Global.spawned_ants = living_ants
 	emit_signal("spawned_ants_label", spawned_ants)
 	emit_signal("living_ants_label", living_ants)
 #	if living_ants > 6 && !ant_count:
@@ -74,7 +76,7 @@ func print_population_status():
 #		ant_count = true
 #		print("Only ", living_ants, " Ants left: ")
 #		emit_signal("last_ants")
-
+		
 #	var all_fitnesses : Array
 #	if everybody_ready:
 #		for child in $Population.get_children():
@@ -87,8 +89,15 @@ func print_population_status():
 func _on_GUI_btn_KillAllAnts_pressed():
 	for child in $Population.get_children():
 		child.killThisOrganism(4)
-	tile_reset()
+	#tile_reset() #TODO tilereset
 
+
+func _on_GUI_btn_Pause_pressed():
+		get_tree().paused = true
+
+
+func _on_GUI_btn_Continue_pressed():
+		get_tree().paused = false
 
 #############################################################################
 #https://godotengine.org/qa/7983/private-vars-inside-custom-godot-script-class
