@@ -2,13 +2,13 @@ extends Node
 
 ### Global variables ##########################################################
 
-var spawned_ants : int setget spawned_ants_set #The number of spawned ants, for GUI
+var population_size
 
 ###############################################################################
 
-var Ants_World = preload("res://scenes/Ants_World.tscn")
-var Ants_World_Instance
-var Ants_World_Instance_existing = false
+var Level_01_Standard = preload("res://scenes/Level_01_Standard.tscn")
+var Level_Instance
+var Level_Instance_existing = false
 
 var Ants_Population = preload("res://scenes/Ants_Population.tscn")
 #var Ants_Population = preload("res://neft_godot/scenes/Population.tscn")
@@ -19,37 +19,65 @@ var Ant_Idividium : PackedScene = preload("res://scenes/Ant_0.5.tscn")
 
 var Input_Count
 
+var current_scene = null
 
 # Called when the node enters the scene tree for the first time.
-#func _ready():
-#	pass 
+func _ready():
+	var root = get_tree().get_root()
+	current_scene = root.get_child(root.get_child_count() - 1)
 
-func spawned_ants_set(new_val):
-	spawned_ants = new_val
-	get_tree().get_root().get_node("Ants_World").get_node("CanvasLayer").get_node("GUI")._on_Ants_World_living_ants_label(new_val)
+
+func goto_scene(path):
+	# https://docs.godotengine.org/en/stable/getting_started/step_by_step/singletons_autoload.html
+	#
+	# This function will usually be called from a signal callback,
+	# or some other function in the current scene.
+	# Deleting the current scene at this point is
+	# a bad idea, because it may still be executing code.
+	# This will result in a crash or unexpected behavior.
+
+	# The solution is to defer the load to a later time, when
+	# we can be sure that no code from the current scene is running:
+
+	call_deferred("_deferred_goto_scene", path)
+
+
+func _deferred_goto_scene(path):
+	# It is now safe to remove the current scene
+	current_scene.free()
+
+	# Load the new scene.
+	var s = ResourceLoader.load(path)
+
+	# Instance the new scene.
+	current_scene = s.instance()
+
+	# Add it to the active scene, as child of root.
+	get_tree().get_root().add_child(current_scene)
+
+	# Optionally, to make it compatible with the SceneTree.change_scene() API.
+	get_tree().set_current_scene(current_scene)
+
+
 
 func Continue_pressed():
-	if Ants_World_Instance_existing:
-		get_tree().get_root().add_child(Ants_World_Instance)
-	#print($MainMenu.hidden_layers.text.to_int())
-	#print($MainMenu/HBoxContainer/CenterContainer_Options/VBoxContainer/HBoxContainer/LineEdit_Population_Size.text.to_int())
+	if Level_Instance_existing:
+		get_tree().get_root().add_child(Level_Instance)
 
 
 func NewGame_pressed():
 	Ants_Population_Instance = Ants_Population.instance()
-	Ants_Population_Instance.get_child(0).size = 10 #$MainMenu.Option_population_size.text.to_int()
+	Ants_Population_Instance.get_child(0).size = population_size.text.to_int()
 	Ants_Population_Instance.get_child(0).organism_parent_scene = Ant_Idividium
 	
-	Ants_World_Instance = Ants_World.instance()
-	get_tree().get_root().add_child(Ants_World_Instance)
-	#get_tree().get_root().get_child(get_tree().get_root().get_child_count() - 1).add_child(Ants_World_Instance)
-	#add_child(Ants_World_Instance)
+	Level_Instance = Level_01_Standard.instance()
+	get_tree().get_root().add_child(Level_Instance)
 	
-	Ants_World_Instance.add_child(Ants_Population_Instance)
+	Level_Instance.add_child(Ants_Population_Instance)
 
 
 func Menu_Button():
 	#Ants_World_Instance.queue_free()
-	get_tree().get_root().remove_child(Ants_World_Instance)
-	Ants_World_Instance_existing = true
+	get_tree().get_root().remove_child(Level_Instance)
+	Level_Instance_existing = true
 

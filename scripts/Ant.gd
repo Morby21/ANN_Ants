@@ -18,7 +18,7 @@ onready var is_Option_maxLifeTimer = node_MainMenu.Option_maxLifeTimer.pressed
 onready var val_Option_maxLifeTimer = node_MainMenu.Option_value_maxLifeTimer.text.to_int()
 ###############################################################################
 
-onready var AntsTileMap = get_node("/root/Ants_World/TileMap")
+onready var AntsTileMap = get_node("/root/Level_01_Standard/TileMap") #HACK funktioniert nicht mehr bei unterschiedlichen Leveln
 
 export(Array, int, 1, 100) var hidden_layers_sizes:Array = [6, 3]
 

@@ -33,7 +33,6 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://scripts/Global.gd"
-GlobalSceneControl="*res://scripts/Global_sceneControl.gd"
 
 [display]
 

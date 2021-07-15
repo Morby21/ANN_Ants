@@ -3,14 +3,10 @@ extends MarginContainer
 signal btn_KillAllAnts_pressed
 signal btn_Pause_pressed
 signal btn_Continue_pressed
-signal btn_Menu_pressed
 
 ### GUI - Top_Left ############################################################
-onready var GenCount_label = $Top/Top_Left/Generation_Counter/Label
 onready var GenCount_var = $Top/Top_Left/Generation_Counter/Var
-onready var AntsSpawned_label = $Top/Top_Left/Ants_Spawned/Label
 onready var AntsSpawned_var = $Top/Top_Left/Ants_Spawned/Var
-onready var AntsAlive_label = $Top/Top_Left/Ants_Alive/Label
 onready var AntsAlive_var = $Top/Top_Left/Ants_Alive/Var
 
 ### GUI - Top_Right ###########################################################
@@ -24,16 +20,10 @@ var spawned_ants_max
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	#print(get_parent().get_parent().get_parent())
-	$Top/Top_Right/Btn_Menu.connect("pressed", get_parent().get_parent().get_parent(), "on_Menu_Button")
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #	pass
-
-
-func _on_Btn_KillAllAnts2_pressed():
-	emit_signal("btn_KillAllAnts_pressed")
 
 
 func _on_Ants_World_generation_count_label(gen_count):
@@ -48,6 +38,10 @@ func _on_Ants_World_spawned_ants_label(spawned_ants):
 	AntsSpawned_var.text = str(spawned_ants, " / ", spawned_ants_max)
 
 
+func _on_Ants_World_game_paused_byScript():
+	Btn_PauseContinue.text = "Continue"
+
+
 func _on_Btn_PauseContinue2_pressed():
 	if Btn_PauseContinue.text == "Pause":
 		Btn_PauseContinue.text = "Continue"
@@ -58,9 +52,8 @@ func _on_Btn_PauseContinue2_pressed():
 		get_tree().paused = false
 
 
-func _on_Ants_World_game_paused_byScript():
-	Btn_PauseContinue.text = "Continue"
-
+func _on_Btn_KillAllAnts2_pressed():
+	emit_signal("btn_KillAllAnts_pressed")
 
 
 func _on_Btn_Menu_pressed():

@@ -43,6 +43,7 @@ func _input(event):
 			Global.Continue_pressed()
 		if mouseOn_NewGame == true:
 			#emit_signal("MainMenu_NewGame_pressed")
+			Global.population_size = Option_population_size
 			Global.NewGame_pressed()
 		if mouseOn_Options == true:
 			if is_options:

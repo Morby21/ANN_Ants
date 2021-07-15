@@ -15,10 +15,15 @@ var living_ants
 var living_ants_old
 var gen_count = 1
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
-	#$CanvasLayer/GUI.spawned_ants_max = $Population.size
+	var GUI = get_parent().get_node("CanvasLayer").get_node("GUI")
+	connect("generation_count_label", GUI, "_on_Ants_World_generation_count_label")
+	connect("living_ants_label", GUI, "_on_Ants_World_living_ants_label")
+	connect("spawned_ants_label", GUI, "_on_Ants_World_spawned_ants_label")
+	connect("_on_GUI_btn_KillAllAnts_pressed", GUI, "btn_KillAllAnts_pressed") #FIXME evtl geht es nicht weil "falsche Richtung"
+	GUI.spawned_ants_max = $Population.size
 	#spawn_timer = 0
 
 
@@ -34,7 +39,7 @@ func _physics_process(_delta):
 	print_population_status() # !Call before var everybody_ready is resetted
 	
 	if everybody_ready:
-		emit_signal("new_generation")
+		emit_signal("new_generation")#TODO wo ging das Signal mal hin?
 		$Population.next_generation()
 		gen_count = gen_count + 1
 		emit_signal("generation_count_label", gen_count)
@@ -65,7 +70,7 @@ func print_population_status():
 			spawned_ants = spawned_ants +1
 		if !child.is_dead:
 			living_ants = living_ants +1
-	Global.spawned_ants = living_ants
+	#Global.spawned_ants = living_ants
 	emit_signal("spawned_ants_label", spawned_ants)
 	emit_signal("living_ants_label", living_ants)
 #	if living_ants > 6 && !ant_count:
@@ -91,13 +96,6 @@ func _on_GUI_btn_KillAllAnts_pressed():
 		child.killThisOrganism(4)
 	#tile_reset() #TODO tilereset
 
-
-func _on_GUI_btn_Pause_pressed():
-		get_tree().paused = true
-
-
-func _on_GUI_btn_Continue_pressed():
-		get_tree().paused = false
 
 #############################################################################
 #https://godotengine.org/qa/7983/private-vars-inside-custom-godot-script-class
