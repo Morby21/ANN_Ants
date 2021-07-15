@@ -68,6 +68,7 @@ margin_bottom = 608.0
 texture = ExtResource( 1 )
 
 [node name="CenterContainer_noOptions" type="CenterContainer" parent="HBoxContainer"]
+visible = false
 margin_left = 541.0
 margin_right = 1126.0
 margin_bottom = 608.0
@@ -82,7 +83,6 @@ margin_bottom = 473.0
 texture = ExtResource( 5 )
 
 [node name="CenterContainer_Options" type="CenterContainer" parent="HBoxContainer"]
-visible = false
 margin_left = 541.0
 margin_right = 1126.0
 margin_bottom = 608.0
@@ -90,13 +90,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Option_List" type="VBoxContainer" parent="HBoxContainer/CenterContainer_Options"]
-margin_left = 170.0
-margin_top = 132.0
-margin_right = 414.0
-margin_bottom = 476.0
+margin_left = 146.0
+margin_top = 74.0
+margin_right = 438.0
+margin_bottom = 534.0
 
 [node name="Option_population_size" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
-margin_right = 244.0
+margin_right = 292.0
 margin_bottom = 24.0
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_population_size"]
@@ -114,7 +114,7 @@ text = "Population Size"
 
 [node name="Option_Input_DistanceToNest" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
 margin_top = 28.0
-margin_right = 244.0
+margin_right = 292.0
 margin_bottom = 68.0
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_Input_DistanceToNest"]
@@ -131,7 +131,7 @@ text = "Input: Distance to Nest"
 
 [node name="Option_Input_Rotation" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
 margin_top = 72.0
-margin_right = 244.0
+margin_right = 292.0
 margin_bottom = 112.0
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_Input_Rotation"]
@@ -146,10 +146,27 @@ margin_right = 175.0
 margin_bottom = 27.0
 text = "Input: Rotation"
 
-[node name="Option_Input_CollisionDetection" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
+[node name="Option_Input_Coordinations" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
 margin_top = 116.0
-margin_right = 244.0
+margin_right = 292.0
 margin_bottom = 156.0
+
+[node name="CheckButton" type="CheckButton" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_Input_Coordinations"]
+margin_right = 76.0
+margin_bottom = 40.0
+pressed = true
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_Input_Coordinations"]
+margin_left = 80.0
+margin_top = 13.0
+margin_right = 210.0
+margin_bottom = 27.0
+text = "Input: Coordinations"
+
+[node name="Option_Input_CollisionDetection" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
+margin_top = 160.0
+margin_right = 292.0
+margin_bottom = 200.0
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_Input_CollisionDetection"]
 margin_right = 76.0
@@ -164,9 +181,9 @@ margin_bottom = 27.0
 text = "Input: Collision Detection"
 
 [node name="Option_Input_TileDetection" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
-margin_top = 160.0
-margin_right = 244.0
-margin_bottom = 200.0
+margin_top = 204.0
+margin_right = 292.0
+margin_bottom = 244.0
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_Input_TileDetection"]
 margin_right = 76.0
@@ -180,10 +197,45 @@ margin_right = 212.0
 margin_bottom = 27.0
 text = "Input: Tile Detection"
 
+[node name="Option_Auto_HiddenLayerSizes" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
+margin_top = 248.0
+margin_right = 292.0
+margin_bottom = 288.0
+
+[node name="CheckButton" type="CheckButton" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_Auto_HiddenLayerSizes"]
+margin_right = 76.0
+margin_bottom = 40.0
+pressed = true
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_Auto_HiddenLayerSizes"]
+margin_left = 80.0
+margin_top = 13.0
+margin_right = 237.0
+margin_bottom = 27.0
+text = "Auto Hidden-Layer-Sizes"
+
+[node name="Option_value_HiddenLayerSizes" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
+margin_top = 292.0
+margin_right = 292.0
+margin_bottom = 316.0
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_value_HiddenLayerSizes"]
+margin_right = 58.0
+margin_bottom = 24.0
+text = "6,3"
+align = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_value_HiddenLayerSizes"]
+margin_left = 62.0
+margin_top = 5.0
+margin_right = 292.0
+margin_bottom = 19.0
+text = "Hidden-Layer-Sizes seperated by \",\""
+
 [node name="Option_lifeTimer" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
-margin_top = 204.0
-margin_right = 244.0
-margin_bottom = 244.0
+margin_top = 320.0
+margin_right = 292.0
+margin_bottom = 360.0
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_lifeTimer"]
 margin_right = 76.0
@@ -198,9 +250,9 @@ margin_bottom = 27.0
 text = "Life Timer"
 
 [node name="Option_value_lifeTimer" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
-margin_top = 248.0
-margin_right = 244.0
-margin_bottom = 272.0
+margin_top = 364.0
+margin_right = 292.0
+margin_bottom = 388.0
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_value_lifeTimer"]
 margin_right = 58.0
@@ -216,9 +268,9 @@ margin_bottom = 19.0
 text = "Life Timer"
 
 [node name="Option_maxLifeTimer" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
-margin_top = 276.0
-margin_right = 244.0
-margin_bottom = 316.0
+margin_top = 392.0
+margin_right = 292.0
+margin_bottom = 432.0
 
 [node name="CheckButton" type="CheckButton" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_maxLifeTimer"]
 margin_right = 76.0
@@ -233,9 +285,9 @@ margin_bottom = 27.0
 text = "Max Life Timer"
 
 [node name="Option_value_maxLifeTimer" type="HBoxContainer" parent="HBoxContainer/CenterContainer_Options/Option_List"]
-margin_top = 320.0
-margin_right = 244.0
-margin_bottom = 344.0
+margin_top = 436.0
+margin_right = 292.0
+margin_bottom = 460.0
 
 [node name="LineEdit" type="LineEdit" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_value_maxLifeTimer"]
 margin_right = 58.0

@@ -1,26 +1,36 @@
 extends KinematicBody2D
 
 ### SetUp Options #############################################################
-onready var is_Option_Input_DistanceToNest = get_node("/root/Game_MockUp/MainMenu").Option_Input_DistanceToNest.pressed
-onready var is_Option_Input_Rotation = get_node("/root/Game_MockUp/MainMenu").Option_Input_Rotation.pressed
-onready var is_Option_Input_CollisionDetection = get_node("/root/Game_MockUp/MainMenu").Option_Input_CollisionDetection.pressed
-onready var is_Option_Input_TileDetection = get_node("/root/Game_MockUp/MainMenu").Option_Input_TileDetection.pressed
-onready var is_Option_lifeTimer = get_node("/root/Game_MockUp/MainMenu").Option_lifeTimer.pressed
-onready var val_Option_lifeTimer = get_node("/root/Game_MockUp/MainMenu").Option_value_lifeTimer.text.to_int()
-onready var is_Option_maxLifeTimer = get_node("/root/Game_MockUp/MainMenu").Option_maxLifeTimer.pressed
-onready var val_Option_maxLifeTimer = get_node("/root/Game_MockUp/MainMenu").Option_value_maxLifeTimer.text.to_int()
+onready var node_MainMenu = get_node("/root/Game_MockUp/MainMenu")
 
-#update_dirty_quadrants(tileMap)
+onready var is_Option_Input_DistanceToNest = node_MainMenu.Option_Input_DistanceToNest.pressed
+onready var is_Option_Input_Rotation = node_MainMenu.Option_Input_Rotation.pressed
+onready var is_Option_Input_Coordinations = node_MainMenu.Option_Input_Coordinations.pressed
+onready var is_Option_Input_CollisionDetection = node_MainMenu.Option_Input_CollisionDetection.pressed
+onready var is_Option_Input_TileDetection = node_MainMenu.Option_Input_TileDetection.pressed
+
+onready var is_Option_Auto_HiddenLayerSizes = node_MainMenu.Option_Auto_HiddenLayerSizes.pressed
+onready var val_Option_value_HiddenLayerSizes = node_MainMenu.Option_value_HiddenLayerSizes.text
+
+onready var is_Option_lifeTimer = node_MainMenu.Option_lifeTimer.pressed
+onready var val_Option_lifeTimer = node_MainMenu.Option_value_lifeTimer.text.to_int()
+onready var is_Option_maxLifeTimer = node_MainMenu.Option_maxLifeTimer.pressed
+onready var val_Option_maxLifeTimer = node_MainMenu.Option_value_maxLifeTimer.text.to_int()
+###############################################################################
+
 onready var Ants_World_Node = get_node("/root/Game_MockUp/Ants_World")
 onready var AntsTileMap = get_node("/root/Game_MockUp/Ants_World/TileMap")
-onready var life_timer : int = 0 
-onready var max_life_timer : int = 0 
-onready var spawn_timer : int = 0
-onready var cycle_timer : int = 0 
-onready var cycle_left_timer : int = 0
-onready var cycle_right_timer : int = 0
-onready var collision_tiles_kill_timer : int = 0
-onready var notMoving_timer : int = 0
+
+export(Array, int, 1, 100) var hidden_layers_sizes:Array = [6, 3]
+
+var life_timer : int = 0 
+var max_life_timer : int = 0 
+var spawn_timer : int = 0
+var cycle_timer : int = 0 
+var cycle_left_timer : int = 0
+var cycle_right_timer : int = 0
+var collision_tiles_kill_timer : int = 0
+var notMoving_timer : int = 0
 
 var spawn : bool = false
 var is_dead : bool = false #Ant isn't alive
@@ -60,33 +70,40 @@ func _ready():
 	
 	#!!!!!!!!! #print("Test", self.name)
 	
+	### SetUp instance of Organism ############################################
 	Organism_Instance = Organism.instance()
 	
 	if is_Option_Input_DistanceToNest:
 		input_count = input_count + 1
 	if is_Option_Input_Rotation:
 		input_count = input_count + 1
+	if is_Option_Input_Coordinations:
+		input_count = input_count + 2
 	if is_Option_Input_CollisionDetection:
 		input_count = input_count + 2
 	if is_Option_Input_TileDetection:
 		input_count = input_count + 2
 	
 	Organism_Instance.input_size = input_count
+	
+	if is_Option_Auto_HiddenLayerSizes:
+		var layer1:int = int(ceil((input_count+1)/3*2)) #+1 for one output. #HACK: Formel doesn't work right (maybe does...confused becaused the +1, so check again later)
+		var layer2:int = int(ceil(layer1/2))
+		hidden_layers_sizes = [layer1, layer2]
+		print(hidden_layers_sizes)
+	else:
+		var hiddenLayerStringArray = val_Option_value_HiddenLayerSizes.split(",")
+		for layerAsString in hiddenLayerStringArray:
+			hidden_layers_sizes.append(int(layerAsString))
+		print(hidden_layers_sizes)
+
+	
+	Organism_Instance.hidden_layers_sizes = hidden_layers_sizes
+	
 	add_child(Organism_Instance)
+	###########################################################################
 
 func _physics_process(_delta):
-	#print($Organism.input_size)
-#	print("++++++++++++++++++++++++++++++++")
-#	print(is_Option_Input_DistanceToNest)
-#	print(is_Option_Input_Rotation)
-#	print(is_Option_Input_CollisionDetection)
-#	print(is_Option_Input_TileDetection)
-#	print(is_Option_lifeTimer)
-#	print(val_Option_lifeTimer)
-#	print(is_Option_maxLifeTimer)
-#	print(val_Option_maxLifeTimer)
-#	print("-----------------------------------")
-	
 	if spawn:
 		if spawn_timer == 0:
 			respawn()
@@ -98,10 +115,14 @@ func _physics_process(_delta):
 		distance_to_home = (self.position).distance_to(AntsTileMap.map_to_world(start_tile))
 		
 		if is_Option_Input_DistanceToNest:
-			inputs.insert(inputs.size(), distance_to_home/5000)
+			inputs.insert(inputs.size(), distance_to_home/5000) #HACK 5000 als var
 		
 		if is_Option_Input_Rotation:
 			inputs.insert(inputs.size(), normalizeRotation(self.rotation_degrees+180))
+		
+		if is_Option_Input_Coordinations:
+			inputs.insert(inputs.size(), self.position.x/5000) #HACK 5000 als var
+			inputs.insert(inputs.size(), self.position.y/5000) #HACK 5000 als var
 		
 		if is_Option_lifeTimer:
 			life_timer = life_timer + 1
@@ -369,12 +390,6 @@ func normalizeRotation(ants_rotation : float) -> float:
 
 
 #-------------------------------------------------------------------------------
-#func get_player_input():
-#	if Input.is_action_pressed("move_right"):
-#		steer_right()
-#	if Input.is_action_pressed("move_left"):
-#		steer_left()
-#-------------------------------------------------------------------------------
 #In the object's code that you want to train, update the fitness with the methods of Organism
 #    get_fitness()
 #    set_fitness(new_fitness)
@@ -382,9 +397,10 @@ func normalizeRotation(ants_rotation : float) -> float:
 #-------------------------------------------------------------------------------
 #Emine Emine Junior - February 27, 2019
 #1. create a population with as members as possible
-#2. Create fitness for each member of the population. this fitness is based on certain goals you would have set for each member of the population.
+#2. Create fitness for each member of the population. this fitness is based on 
+#   certain goals you would have set for each member of the population.
 #3. identify, breed and train these members with best fitness.
-#4. Change the other members of the populations with less fitness, so that they have the acceptable level of fitness as set by you based on some predefined goals.
+#4. Change the other members of the populations with less fitness, so that they
+#   have the acceptable level of fitness as set by you based on some predefined goals.
 #5. kill from the network those members with still lesser fitness level after step 4
 #6. repeat step 2 until you maximize your network.
-#Hope this helps

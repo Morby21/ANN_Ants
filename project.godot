@@ -30,6 +30,12 @@ config/name="ANN_Ants"
 run/main_scene="res://Game_MockUp.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://Global.gd"
+GlobalVar="*res://Global_var.gd"
+GlobalSceneControl="*res://Global_sceneControl.gd"
+
 [display]
 
 window/size/width=1366
