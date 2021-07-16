@@ -6,6 +6,7 @@ extends MarginContainer
 var mouseOn_Continue = false
 var mouseOn_NewGame = false
 var mouseOn_Options = false
+var mouse_Exit = false
 
 var is_options
 
@@ -72,3 +73,7 @@ func _on_Options_mouse_entered():
 	mouseOn_Options = true
 func _on_Options_mouse_exited():
 	mouseOn_Options = false
+
+
+func _on_Exit_pressed():
+	Global.Exit_Game()

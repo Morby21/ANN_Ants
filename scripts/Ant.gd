@@ -94,13 +94,13 @@ func _ready():
 		for layerAsString in hiddenLayerStringArray:
 			hidden_layers_sizes.append(int(layerAsString))
 		#print(hidden_layers_sizes)
-
 	
 	Organism_Instance.hidden_layers_sizes = hidden_layers_sizes
 	
 	add_child(Organism_Instance)
 	###########################################################################
 	killThisOrganism(0) #Initial kill, to force spawn-timer!
+
 
 func _physics_process(_delta):
 	AntsTileMap = get_parent().get_parent().get_parent().get_TileMap()
@@ -305,7 +305,7 @@ func killThisOrganism(kill_reason:int) -> void:
 		elif kill_reason == 3:
 			print(self.name, " has killed for Cicling. (Fitness: ", $Organism.get_fitness(),")")
 		elif kill_reason == 4:
-			print(self.name, " by Button. (Fitness: ", $Organism.get_fitness(),")")
+			print(self.name, " by Button. (Fitness: ", $Organism.get_fitness(),")") #FIXME Killbutton killt nicht zuverlässig
 		elif kill_reason == 5:
 			print(self.name, " has killed for not Moving. (Fitness: ", $Organism.get_fitness(),")")
 	is_ready = true
@@ -342,7 +342,7 @@ func normalizeRotation(ants_rotation : float) -> float:
 #    set_fitness(new_fitness)
 #    add_fitness(amount)
 #-------------------------------------------------------------------------------
-#Emine Emine Junior - February 27, 2019
+#Emine Junior - February 27, 2019
 #1. create a population with as members as possible
 #2. Create fitness for each member of the population. this fitness is based on 
 #   certain goals you would have set for each member of the population.

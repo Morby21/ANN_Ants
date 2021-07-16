@@ -27,6 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ANN_Ants"
+config/description="Artificial Neural Network - Ant Game"
 run/main_scene="res://scenes/MainMenu.tscn"
 config/icon="res://icon.png"
 
