@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://scenes/MainMenu.tscn" type="PackedScene" id=2]
-
-[node name="Game_MockUp" type="Node"]
-
-[node name="MainMenu" parent="." instance=ExtResource( 2 )]

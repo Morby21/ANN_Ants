@@ -1,8 +1,6 @@
 extends MarginContainer
 
 signal btn_KillAllAnts_pressed
-signal btn_Pause_pressed
-signal btn_Continue_pressed
 
 ### GUI - Top_Left ############################################################
 onready var GenCount_var = $Top/Top_Left/Generation_Counter/Var
@@ -42,6 +40,14 @@ func _on_Ants_World_game_paused_byScript():
 	Btn_PauseContinue.text = "Continue"
 
 
+func _on_Btn_NextLevel_pressed():
+	Global.Next_Level()
+
+
+func _on_Btn_KillAllAnts2_pressed():
+	emit_signal("btn_KillAllAnts_pressed")
+
+
 func _on_Btn_PauseContinue2_pressed():
 	if Btn_PauseContinue.text == "Pause":
 		Btn_PauseContinue.text = "Continue"
@@ -50,10 +56,6 @@ func _on_Btn_PauseContinue2_pressed():
 	else:
 		Btn_PauseContinue.text = "Pause"
 		get_tree().paused = false
-
-
-func _on_Btn_KillAllAnts2_pressed():
-	emit_signal("btn_KillAllAnts_pressed")
 
 
 func _on_Btn_Menu_pressed():

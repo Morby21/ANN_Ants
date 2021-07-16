@@ -18,7 +18,11 @@ onready var is_Option_maxLifeTimer = node_MainMenu.Option_maxLifeTimer.pressed
 onready var val_Option_maxLifeTimer = node_MainMenu.Option_value_maxLifeTimer.text.to_int()
 ###############################################################################
 
-onready var AntsTileMap = get_node("/root/Level_01_Standard/TileMap") #HACK funktioniert nicht mehr bei unterschiedlichen Leveln
+#onready var Level_node = get_parent().get_parent().get_parent()
+#var AntsTileMap_2 = Level_node.get_TileMap() #TODO get_TileMap im level knoten einbauen
+#onready var AntsTileMap = get_node("/root/Level_01_Standard/TileMap") #HACK funktioniert nicht mehr bei unterschiedlichen Leveln (! Zugriff auf TileMap per position_get_funktion der Level Scene) 
+#var AntsTileMap = Level_node.get_node("TileMap")
+var AntsTileMap
 
 export(Array, int, 1, 100) var hidden_layers_sizes:Array = [6, 3]
 
@@ -96,8 +100,10 @@ func _ready():
 	
 	add_child(Organism_Instance)
 	###########################################################################
+	killThisOrganism(0) #Initial kill, to force spawn-timer!
 
 func _physics_process(_delta):
+	AntsTileMap = get_parent().get_parent().get_parent().get_TileMap()
 	if spawn:
 		if spawn_timer == 0:
 			respawn()
@@ -105,7 +111,7 @@ func _physics_process(_delta):
 	
 	if !is_dead: #"While" ant is living
 		inputs = [] #Reset Array
-		mapPosition_ant = AntsTileMap.world_to_map(self.position) #coordinates are divided through TileMap-Node's scale-factor
+		mapPosition_ant = AntsTileMap.world_to_map(self.position) 
 		distance_to_home = (self.position).distance_to(AntsTileMap.map_to_world(start_tile))
 		
 		if is_Option_Input_DistanceToNest:
@@ -136,8 +142,6 @@ func _physics_process(_delta):
 				scan_for_collision() 
 				scan_for_tiles() 
 				kill_ant_for_cycling()
-				#kill_ant_for_cycling_ON_1tile()
-				#kill_ant_for_notMoving()
 			2:  #DRAW TRAIL Drawing a pheremone trail back to home/nest/...
 				draw_pheremone_trail() 
 			3:  #CARRY Carrying something back to home/nest/...
@@ -153,15 +157,12 @@ func move_ant(direction) -> void:
 	else:
 		$AnimatedSprite.stop()
 	if collision != null:
-#		print(cell_index_leftAntennae," - ", cell_index_rightAntennae)
-#	if cell_index_leftAntennae == 4 || cell_index_rightAntennae == 4:
 		collision_tiles_kill_timer = collision_tiles_kill_timer + 1
 		if collision_tiles_kill_timer == 120:
 			collision_tiles_kill_timer = 0
-			#$Organism.set_fitness(0)
 			killThisOrganism(2)
 	else:
-		collision_tiles_kill_timer = 0	
+		collision_tiles_kill_timer = 0
 
 
 func searching() -> void:
@@ -178,7 +179,6 @@ func searching() -> void:
 func draw_pheremone_trail() -> void:
 	var direction : Vector2 = mapPosition_ant.direction_to(start_tile) * speedFactor
 	move_ant(direction)
-	
 	AntsTileMap.set_cellv(mapPosition_ant, 1)
 
 
@@ -230,49 +230,9 @@ func organism_IO():
 		cycle_right_timer = 0
 
 
-func kill_ant_for_notMoving():
-	notMoving_timer = notMoving_timer + 1
-	
-	if mapPosition_ant_before != mapPosition_ant: #check for new/old tiles
-		notMoving_timer = 0
-		last_used_tiles.push_back(mapPosition_ant) 
-		if last_used_tiles.size() > cycle_punishing_memorySize: 
-			last_used_tiles.pop_front()
-		
-		mapPosition_ant_before = mapPosition_ant  #Reset_if (set actual position to old position)
-	
-	if notMoving_timer == 400: 
-		notMoving_timer = 0
-		last_used_tiles.push_back(mapPosition_ant) 
-		if last_used_tiles.size() > cycle_punishing_memorySize: 
-			last_used_tiles.pop_front()
-	
-	if last_used_tiles.count(mapPosition_ant) >= cycle_punishing_countLimit:
-		killThisOrganism(5)
-
-
 func kill_ant_for_cycling():
 	if cycle_left_timer >= 300 || cycle_right_timer >= 300:
 		killThisOrganism(3)
-#		print(is_Option_Input_DistanceToNest)
-#		print(is_Option_Input_Rotation)
-#		print(is_Option_Input_CollisionDetection)
-#		print(is_Option_Input_TileDetection)
-#		print(is_Option_lifeTimer)
-#		print(val_Option_lifeTimer)
-#		print(is_Option_maxLifeTimer)
-#		print(val_Option_maxLifeTimer)
-		
-		
-#	if mapPosition_ant_before != mapPosition_ant: #check for new/old tiles
-#		last_used_tiles.push_back(mapPosition_ant) 
-#		if last_used_tiles.size() > cycle_punishing_memorySize: 
-#			last_used_tiles.pop_front()
-#
-#		mapPosition_ant_before = mapPosition_ant  #Reset_if (set actual position to old position)
-#
-#	if last_used_tiles.count(mapPosition_ant) >= cycle_punishing_countLimit:
-#		killThisOrganism(3)
 
 
 func found_new_Area(var _world2mapPosition):
@@ -336,6 +296,8 @@ func trigger_respawn(given_spawn_timer) -> void:
 func killThisOrganism(kill_reason:int) -> void:
 	$AnimatedSprite.stop()
 	if false: #var == true:
+		if kill_reason == 0:
+			print(self.name, " just initial-kill, to force spawn countdown. (Fitness: ", $Organism.get_fitness(),")") #HACK Man könnte sie auch am Anfang gleich tot spawnen lassen, um ein unnötiges new_generation zu vermeiden!
 		if kill_reason == 1:
 			print(self.name, " has killed over Time. (Fitness: ", $Organism.get_fitness(),")")
 		elif kill_reason == 2:
@@ -346,7 +308,6 @@ func killThisOrganism(kill_reason:int) -> void:
 			print(self.name, " by Button. (Fitness: ", $Organism.get_fitness(),")")
 		elif kill_reason == 5:
 			print(self.name, " has killed for not Moving. (Fitness: ", $Organism.get_fitness(),")")
-	kill_reason = 0
 	is_ready = true
 	is_dead = true
 	visible = false

@@ -7,6 +7,8 @@ var population_size
 ###############################################################################
 
 var Level_01_Standard = preload("res://scenes/Level_01_Standard.tscn")
+var Level_02_Training = preload("res://scenes/Level_02_Training.tscn")
+
 var Level_Instance
 var Level_Instance_existing = false
 
@@ -77,7 +79,36 @@ func NewGame_pressed():
 
 
 func Menu_Button():
-	#Ants_World_Instance.queue_free()
 	get_tree().get_root().remove_child(Level_Instance)
 	Level_Instance_existing = true
 
+
+func Next_Level():
+	Level_Instance.remove_child(Ants_Population_Instance)
+	Level_Instance.queue_free()
+	if Level_Instance.name == "Level_01_Standard":
+		Level_Instance = Level_02_Training.instance()
+	else: 
+		Level_Instance = Level_01_Standard.instance()
+	get_tree().get_root().add_child(Level_Instance)
+	Level_Instance.add_child(Ants_Population_Instance)
+
+
+
+
+### Private variables #########################################################
+#https://godotengine.org/qa/7983/private-vars-inside-custom-godot-script-class
+#var my_good_private_x = 6 setget private_gs,private_gs
+#var my_better_private_y = 9 setget private_gs,private_gs
+#
+#func private_gs(val = null): 
+#    # Using a default value to make it possible to call with both 1 and 0 arguments (e.g. both as setter and getter)
+#    print("Access to private variable!!!")
+#    print_stack()
+#    pass # No set, no get for you!
+#
+## Usage:
+#func _ready():
+#    my_good_private_x = 54 # works!
+#    print(my_good_private_x) # 54
+#    self.my_better_private_y = 23 # migth work, depends on which version of godot you use
