@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/characters.png-c6a9fe63f07b2b8f6a27e7313e307fb4.stex"
+path="res://.import/godot_cam.png-a8cbe07da698513fc0310e30c261d7fc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/main_menu/characters.png"
-dest_files=[ "res://.import/characters.png-c6a9fe63f07b2b8f6a27e7313e307fb4.stex" ]
+source_file="res://assets/godot_cam.png"
+dest_files=[ "res://.import/godot_cam.png-a8cbe07da698513fc0310e30c261d7fc.stex" ]
 
 [params]
 

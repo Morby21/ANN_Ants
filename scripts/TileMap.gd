@@ -19,9 +19,9 @@ func _physics_process(delta):
 
 
 func _input(event):
-	if event.is_action_pressed("MouseClick_Left"):
+	if event.is_action_pressed("MouseClick_Right"):
 		draw_tiles = true
-	if event.is_action_released("MouseClick_Left"):
+	if event.is_action_released("MouseClick_Right"):
 		draw_tiles = false
 
 

@@ -6,11 +6,12 @@ extends MarginContainer
 var mouseOn_Continue = false
 var mouseOn_NewGame = false
 var mouseOn_Options = false
-var mouse_Exit = false
+var mouseOn_Exit = false
 
 var is_options
 #test
 ### Menu - Backbone ###########################################################
+onready var Btn_Continue = $HBoxContainer/VBoxContainer/MenuOptions/Continue
 onready var options_container = $HBoxContainer/CenterContainer_Options
 onready var noOptions_container = $HBoxContainer/CenterContainer_noOptions
 
@@ -42,6 +43,10 @@ func _ready():
 	Option_value_lifeTimer.text = str(Global.Option_value_lifeTimer)
 	Option_maxLifeTimer.pressed = Global.Option_maxLifeTimer
 	Option_value_maxLifeTimer.text = str(Global.Option_value_maxLifeTimer)
+	
+	#Continue-Button show/hide
+	if Global.current_scene != null:
+		Btn_Continue.show()
 
 #	Global.Option_population_size = $HBoxContainer/CenterContainer_Options/Option_List/Option_population_size/LineEdit
 #	Global.Option_Input_DistanceToNest  = $HBoxContainer/CenterContainer_Options/Option_List/Option_Input_DistanceToNest/CheckButton
@@ -93,6 +98,8 @@ func _input(event):
 					noOptions_container.hide()
 					options_container.show()
 					is_options = true
+			if mouseOn_Exit == true:
+				Global.Exit_Game()
 
 
 func _on_Continue_mouse_entered():
@@ -109,9 +116,16 @@ func _on_NewGame_mouse_exited():
 
 func _on_Options_mouse_entered():
 	mouseOn_Options = true
+	print("fufuda")
 func _on_Options_mouse_exited():
 	mouseOn_Options = false
 
 
-func _on_Exit_pressed():
-	Global.Exit_Game()
+func _on_Exit_mouse_entered():
+	mouseOn_Exit = true
+	print("fafa")
+func _on_Exit_mouse_exited():
+	mouseOn_Exit = false
+
+
+

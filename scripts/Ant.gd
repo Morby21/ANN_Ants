@@ -1,27 +1,5 @@
 extends KinematicBody2D
 
-### SetUp Options #############################################################
-#onready var node_MainMenu = Global #get_node("/root/MainMenu")
-
-#onready var is_Option_Input_DistanceToNest = Global.Option_Input_DistanceToNest #node_MainMenu.Option_Input_DistanceToNest.pressed
-#onready var is_Option_Input_Rotation = Global.Option_Input_Rotation #node_MainMenu.Option_Input_Rotation.pressed
-#onready var is_Option_Input_Coordinations = Global.Option_Input_Coordinations #node_MainMenu.Option_Input_Coordinations.pressed
-#onready var is_Option_Input_CollisionDetection = Global.Option_Input_CollisionDetection #node_MainMenu.Option_Input_CollisionDetection.pressed
-#onready var is_Option_Input_TileDetection = Global.Option_Input_TileDetection #node_MainMenu.Option_Input_TileDetection.pressed
-
-#onready var is_Option_Auto_HiddenLayerSizes = Global.Option_Auto_HiddenLayerSizes #node_MainMenu.Option_Auto_HiddenLayerSizes.pressed
-#onready var val_Option_value_HiddenLayerSizes = Global.Option_value_HiddenLayerSizes #node_MainMenu.Option_value_HiddenLayerSizes.text
-
-#onready var is_Option_lifeTimer = Global.Option_lifeTimer #node_MainMenu.Option_lifeTimer.pressed
-#onready var val_Option_lifeTimer = Global.Option_value_lifeTimer #node_MainMenu.Option_value_lifeTimer.text.to_int()
-#onready var is_Option_maxLifeTimer = Global.Option_maxLifeTimer #node_MainMenu.Option_maxLifeTimer.pressed
-#onready var val_Option_maxLifeTimer = Global.Option_value_maxLifeTimer #node_MainMenu.Option_value_maxLifeTimer.text.to_int()
-###############################################################################
-
-#onready var Level_node = get_parent().get_parent().get_parent()
-#var AntsTileMap_2 = Level_node.get_TileMap() #TODO get_TileMap im level knoten einbauen
-#onready var AntsTileMap = get_node("/root/Level_01_Standard/TileMap") #HACK funktioniert nicht mehr bei unterschiedlichen Leveln (! Zugriff auf TileMap per position_get_funktion der Level Scene) 
-#var AntsTileMap = Level_node.get_node("TileMap")
 var AntsTileMap
 
 export(Array, int, 1, 100) var hidden_layers_sizes:Array = [6, 3]

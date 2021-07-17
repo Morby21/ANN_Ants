@@ -77,6 +77,12 @@ func _deferred_goto_scene(path, hookup_ants_population):
 		current_scene.add_child(Ants_Population_Instance)
 
 
+func Continue_pressed():
+	if current_scene != null:
+		get_tree().get_root().add_child(current_scene)
+		MainMenu.queue_free()
+
+
 func NewGame_pressed():
 	Ants_Population_Instance = Ants_Population.instance()
 	Ants_Population_Instance.get_child(0).size = Option_population_size
@@ -86,23 +92,15 @@ func NewGame_pressed():
 	MainMenu.queue_free()
 
 
-func Continue_pressed():
-	print("testo")
-	if current_scene != null:
-		get_tree().get_root().add_child(current_scene)
-	MainMenu.hide()
+func Exit_Game():
+	get_tree().quit()
 
 
 func Menu_Button():
-	print("huhu")
-	var MainMenu_load = ResourceLoader.load("res://scenes/MainMenu.tscn")
+	var MainMenu_load = ResourceLoader.load("res://scenes/MainMenu.tscn") #TODO preload on
 	MainMenu = MainMenu_load.instance() #MainMenu.show()
 	get_tree().get_root().add_child(MainMenu)
 	get_tree().get_root().remove_child(current_scene)
-
-
-func Exit_Game():
-	get_tree().quit()
 
 
 ### Private variables #########################################################
