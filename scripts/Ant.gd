@@ -238,7 +238,7 @@ func kill_ant_for_cycling():
 
 
 func found_new_Area(var _world2mapPosition):
-	$Organism.add_fitness(1.1+(distance_to_home/50000)) #Fitness for finding new areas
+	$Organism.add_fitness(1.1+(distance_to_home/50000)) #HACK #Fitness for finding new areas
 	life_timer = 0 #Extend Lifecicle
 	AntsTileMap.set_cellv(_world2mapPosition, 3)
 
