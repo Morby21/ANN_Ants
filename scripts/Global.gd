@@ -5,8 +5,7 @@ extends Node
 var population_size
 var selected_tile: int
 
-#var MainMenu = get_tree().get_root().get_node("/root/MainMenu") 
-#onready var MainMenu = get_tree().get_root().get_node("MainMenu") 
+onready var MainMenu = get_tree().get_root().get_node("MainMenu") 
 
 ###############################################################################
 var Ant_Individium : PackedScene = preload("res://scenes/Ant_0.5.tscn")
@@ -64,8 +63,7 @@ func NewGame_pressed():
 	Ants_Population_Instance.get_child(0).size = population_size.text.to_int()
 	Ants_Population_Instance.get_child(0).organism_parent_scene = Ant_Individium
 	goto_scene("res://scenes/Level_01_Standard.tscn", true)
-	#get_tree().get_root().get_node("MainMenu").hide()
-	#MainMenu.hide() #FIXME !!!!!
+	MainMenu.hide()
 
 
 func Continue_pressed():

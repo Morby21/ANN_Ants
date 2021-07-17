@@ -40,23 +40,24 @@ func _ready():
 func _input(event):
 #	if event is InputEventScreenTouch: #TODO TouchScreen-Support integrieren
 #		if event.is_pressed():
-	if event.is_action_pressed("MouseClick_Left"):
-		if mouseOn_Continue == true:
-			#emit_signal("MainMenu_Continue_pressed")
-			Global.Continue_pressed()
-		if mouseOn_NewGame == true:
-			#emit_signal("MainMenu_NewGame_pressed")
-			Global.population_size = Option_population_size
-			Global.NewGame_pressed()
-		if mouseOn_Options == true:
-			if is_options:
-				options_container.hide()
-				noOptions_container.show()
-				is_options = false
-			else:
-				noOptions_container.hide()
-				options_container.show()
-				is_options = true
+	if is_visible():
+		if event.is_action_pressed("MouseClick_Left"):
+			if mouseOn_Continue == true:
+				#emit_signal("MainMenu_Continue_pressed")
+				Global.Continue_pressed()
+			if mouseOn_NewGame == true:
+				#emit_signal("MainMenu_NewGame_pressed")
+				Global.population_size = Option_population_size
+				Global.NewGame_pressed()
+			if mouseOn_Options == true:
+				if is_options:
+					options_container.hide()
+					noOptions_container.show()
+					is_options = false
+				else:
+					noOptions_container.hide()
+					options_container.show()
+					is_options = true
 
 
 func _on_Continue_mouse_entered():
