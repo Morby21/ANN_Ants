@@ -64,6 +64,8 @@ var Organism = preload("res://neft_godot/scenes/Organism.tscn")
 var Organism_Instance
 var input_count = 0
 
+var map_size = 5000 #HACK needs to be set to the actual map size 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ants_task = 1 #Set ants starting Task to SEARCHING
@@ -115,14 +117,14 @@ func _physics_process(_delta):
 		distance_to_home = (self.position).distance_to(AntsTileMap.map_to_world(start_tile))
 		
 		if is_Option_Input_DistanceToNest:
-			inputs.insert(inputs.size(), distance_to_home/5000) #HACK 5000 als var
+			inputs.insert(inputs.size(), distance_to_home/map_size)
 		
 		if is_Option_Input_Rotation:
 			inputs.insert(inputs.size(), normalizeRotation(self.rotation_degrees+180))
 		
 		if is_Option_Input_Coordinations:
-			inputs.insert(inputs.size(), self.position.x/5000) #HACK 5000 als var
-			inputs.insert(inputs.size(), self.position.y/5000) #HACK 5000 als var
+			inputs.insert(inputs.size(), self.position.x/map_size)
+			inputs.insert(inputs.size(), self.position.y/map_size)
 		
 		if is_Option_lifeTimer:
 			life_timer = life_timer + 1
