@@ -1,21 +1,21 @@
 extends KinematicBody2D
 
 ### SetUp Options #############################################################
-onready var node_MainMenu = get_node("/root/MainMenu")
+#onready var node_MainMenu = Global #get_node("/root/MainMenu")
 
-onready var is_Option_Input_DistanceToNest = node_MainMenu.Option_Input_DistanceToNest.pressed
-onready var is_Option_Input_Rotation = node_MainMenu.Option_Input_Rotation.pressed
-onready var is_Option_Input_Coordinations = node_MainMenu.Option_Input_Coordinations.pressed
-onready var is_Option_Input_CollisionDetection = node_MainMenu.Option_Input_CollisionDetection.pressed
-onready var is_Option_Input_TileDetection = node_MainMenu.Option_Input_TileDetection.pressed
+#onready var is_Option_Input_DistanceToNest = Global.Option_Input_DistanceToNest #node_MainMenu.Option_Input_DistanceToNest.pressed
+#onready var is_Option_Input_Rotation = Global.Option_Input_Rotation #node_MainMenu.Option_Input_Rotation.pressed
+#onready var is_Option_Input_Coordinations = Global.Option_Input_Coordinations #node_MainMenu.Option_Input_Coordinations.pressed
+#onready var is_Option_Input_CollisionDetection = Global.Option_Input_CollisionDetection #node_MainMenu.Option_Input_CollisionDetection.pressed
+#onready var is_Option_Input_TileDetection = Global.Option_Input_TileDetection #node_MainMenu.Option_Input_TileDetection.pressed
 
-onready var is_Option_Auto_HiddenLayerSizes = node_MainMenu.Option_Auto_HiddenLayerSizes.pressed
-onready var val_Option_value_HiddenLayerSizes = node_MainMenu.Option_value_HiddenLayerSizes.text
+#onready var is_Option_Auto_HiddenLayerSizes = Global.Option_Auto_HiddenLayerSizes #node_MainMenu.Option_Auto_HiddenLayerSizes.pressed
+#onready var val_Option_value_HiddenLayerSizes = Global.Option_value_HiddenLayerSizes #node_MainMenu.Option_value_HiddenLayerSizes.text
 
-onready var is_Option_lifeTimer = node_MainMenu.Option_lifeTimer.pressed
-onready var val_Option_lifeTimer = node_MainMenu.Option_value_lifeTimer.text.to_int()
-onready var is_Option_maxLifeTimer = node_MainMenu.Option_maxLifeTimer.pressed
-onready var val_Option_maxLifeTimer = node_MainMenu.Option_value_maxLifeTimer.text.to_int()
+#onready var is_Option_lifeTimer = Global.Option_lifeTimer #node_MainMenu.Option_lifeTimer.pressed
+#onready var val_Option_lifeTimer = Global.Option_value_lifeTimer #node_MainMenu.Option_value_lifeTimer.text.to_int()
+#onready var is_Option_maxLifeTimer = Global.Option_maxLifeTimer #node_MainMenu.Option_maxLifeTimer.pressed
+#onready var val_Option_maxLifeTimer = Global.Option_value_maxLifeTimer #node_MainMenu.Option_value_maxLifeTimer.text.to_int()
 ###############################################################################
 
 #onready var Level_node = get_parent().get_parent().get_parent()
@@ -73,26 +73,26 @@ func _ready():
 	### SetUp instance of Organism ############################################
 	Organism_Instance = Organism.instance()
 	
-	if is_Option_Input_DistanceToNest:
+	if Global.Option_Input_DistanceToNest:
 		input_count = input_count + 1
-	if is_Option_Input_Rotation:
+	if Global.Option_Input_Rotation:
 		input_count = input_count + 1
-	if is_Option_Input_Coordinations:
+	if Global.Option_Input_Coordinations:
 		input_count = input_count + 2
-	if is_Option_Input_CollisionDetection:
+	if Global.Option_Input_CollisionDetection:
 		input_count = input_count + 2
-	if is_Option_Input_TileDetection:
+	if Global.Option_Input_TileDetection:
 		input_count = input_count + 2
 	
 	Organism_Instance.input_size = input_count
 	
-	if is_Option_Auto_HiddenLayerSizes:
+	if Global.Option_Auto_HiddenLayerSizes:
 		var layer1:int = int(ceil((input_count+1)/3*2)) #+1 for one output. #HACK: Formel doesn't work right (maybe does...confused becaused the +1, so check again later)
 		var layer2:int = int(ceil(layer1/2))
 		hidden_layers_sizes = [layer1, layer2]
 		#print(hidden_layers_sizes)
 	else: #FIXME whole else doesn't work
-		var hiddenLayerStringArray = val_Option_value_HiddenLayerSizes.split(",")
+		var hiddenLayerStringArray = Global.Option_value_HiddenLayerSizes.split(",")
 		for layerAsString in hiddenLayerStringArray:
 			hidden_layers_sizes.append(int(layerAsString))
 		#print(hidden_layers_sizes)
@@ -116,25 +116,25 @@ func _physics_process(_delta):
 		mapPosition_ant = AntsTileMap.world_to_map(self.position) 
 		distance_to_home = (self.position).distance_to(AntsTileMap.map_to_world(start_tile))
 		
-		if is_Option_Input_DistanceToNest:
+		if Global.Option_Input_DistanceToNest:
 			inputs.insert(inputs.size(), distance_to_home/map_size)
 		
-		if is_Option_Input_Rotation:
+		if Global.Option_Input_Rotation:
 			inputs.insert(inputs.size(), normalizeRotation(self.rotation_degrees+180))
 		
-		if is_Option_Input_Coordinations:
+		if Global.Option_Input_Coordinations:
 			inputs.insert(inputs.size(), self.position.x/map_size)
 			inputs.insert(inputs.size(), self.position.y/map_size)
 		
-		if is_Option_lifeTimer:
+		if Global.Option_lifeTimer:
 			life_timer = life_timer + 1
-			if life_timer == val_Option_lifeTimer: #3000 #ants "standard" living-cycle (possible to be resetted for good work)
+			if life_timer == Global.Option_value_lifeTimer: #3000 #ants "standard" living-cycle (possible to be resetted for good work)
 				killThisOrganism(1)
 				life_timer = 0
 		
-		if is_Option_maxLifeTimer:
+		if Global.Option_maxLifeTimer:
 			max_life_timer = max_life_timer + 1
-			if max_life_timer == val_Option_maxLifeTimer: #15000
+			if max_life_timer == Global.Option_value_maxLifeTimer: #15000
 				killThisOrganism(1)
 				max_life_timer = 0
 			
@@ -197,7 +197,7 @@ func scan_for_collision() -> void:
 	var rightCollisionDistance : float = rightCollisionPoint.distance_to($antennae_right.get_global_transform().get_origin())
 	var antennae_right : float = normalizeDistance(rightCollisionDistance)
 	
-	if is_Option_Input_CollisionDetection:
+	if Global.Option_Input_CollisionDetection:
 		#print(leftCollisionDistance, " - ", rightCollisionDistance)
 		#print(antennae_left, " - ", antennae_right)
 		inputs.insert(inputs.size(), antennae_left)
@@ -213,7 +213,7 @@ func scan_for_tiles() -> void:
 	var cell_index_rightAntennae = AntsTileMap.get_cellv(rightAntennae_mapPosition)
 	var normalizedTileIndex_rightAntennae  = normalizeTile(cell_index_rightAntennae)
 	
-	if is_Option_Input_TileDetection:
+	if Global.Option_Input_TileDetection:
 		#print(normalizedTileIndex_leftAntennae, " - ", normalizedTileIndex_rightAntennae)
 		inputs.insert(inputs.size(), normalizedTileIndex_leftAntennae)
 		inputs.insert(inputs.size(), normalizedTileIndex_rightAntennae)

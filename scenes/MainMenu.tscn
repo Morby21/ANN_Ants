@@ -110,7 +110,6 @@ margin_bottom = 24.0
 margin_right = 58.0
 margin_bottom = 24.0
 text = "50"
-align = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_population_size"]
 margin_left = 62.0
@@ -265,7 +264,6 @@ margin_bottom = 388.0
 margin_right = 58.0
 margin_bottom = 24.0
 text = "3000"
-align = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_value_lifeTimer"]
 margin_left = 62.0
@@ -300,7 +298,6 @@ margin_bottom = 460.0
 margin_right = 58.0
 margin_bottom = 24.0
 text = "15000"
-align = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/CenterContainer_Options/Option_List/Option_value_maxLifeTimer"]
 margin_left = 62.0

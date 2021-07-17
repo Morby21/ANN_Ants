@@ -1,12 +1,31 @@
 extends Node
 
 ### Global variables ##########################################################
-
-var population_size
+#-- General -------------------------------------------------------------------
 var selected_tile: int
 
-onready var MainMenu = get_tree().get_root().get_node("MainMenu") 
+#-- Ant Population/Organism ---------------------------------------------------
+var population_size
 
+
+
+
+#-- MainMenu-Options (and its Standard values)---------------------------------
+var Option_population_size = 20
+var Option_Input_DistanceToNest = true
+var Option_Input_Rotation = true
+var Option_Input_Coordinations = true
+var Option_Input_CollisionDetection = true
+var Option_Input_TileDetection = true
+var Option_Auto_HiddenLayerSizes = true
+var Option_value_HiddenLayerSizes = "6,3"
+var Option_lifeTimer = true
+var Option_value_lifeTimer = 3000
+var Option_maxLifeTimer = true
+var Option_value_maxLifeTimer = 15000
+
+
+onready var MainMenu = get_tree().get_root().get_node("MainMenu") 
 ###############################################################################
 var Ant_Individium : PackedScene = preload("res://scenes/Ant_0.5.tscn")
 var Ants_Population = preload("res://scenes/Ants_Population.tscn")
@@ -60,21 +79,25 @@ func _deferred_goto_scene(path, hookup_ants_population):
 
 func NewGame_pressed():
 	Ants_Population_Instance = Ants_Population.instance()
-	Ants_Population_Instance.get_child(0).size = population_size.text.to_int()
+	Ants_Population_Instance.get_child(0).size = Option_population_size
+	#TODO Hiddenlayers
 	Ants_Population_Instance.get_child(0).organism_parent_scene = Ant_Individium
 	goto_scene("res://scenes/Level_01_Standard.tscn", true)
-	MainMenu.hide()
+	MainMenu.queue_free()
 
 
 func Continue_pressed():
+	print("testo")
 	if current_scene != null:
 		get_tree().get_root().add_child(current_scene)
-	#MainMenu.hide()
+	MainMenu.hide()
 
 
 func Menu_Button():
 	print("huhu")
-	#MainMenu.show()
+	var MainMenu_load = ResourceLoader.load("res://scenes/MainMenu.tscn")
+	MainMenu = MainMenu_load.instance() #MainMenu.show()
+	get_tree().get_root().add_child(MainMenu)
 	get_tree().get_root().remove_child(current_scene)
 
 
