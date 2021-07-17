@@ -36,9 +36,11 @@ func _ready():
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.is_pressed():
+		#if event.is_pressed():
+		if event.is_action_pressed("MouseClick_Middle"):
 			dragging = true
 		else:
 			dragging = false
 	elif event is InputEventMouseMotion and dragging:
 		position = get_global_mouse_position()
+

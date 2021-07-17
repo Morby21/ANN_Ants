@@ -38,7 +38,9 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("mouseClick_left"):
+#	if event is InputEventScreenTouch: #TODO TS-Support integrieren
+#		if event.is_pressed():
+	if event.is_action_pressed("MouseClick_Left"):
 		if mouseOn_Continue == true:
 			#emit_signal("MainMenu_Continue_pressed")
 			Global.Continue_pressed()

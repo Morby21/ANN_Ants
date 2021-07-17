@@ -37,7 +37,7 @@ func _physics_process(_delta):
 	print_population_status() # !Call before var everybody_ready is resetted
 	
 	if everybody_ready:
-		emit_signal("new_generation")#TODO wo ging das Signal mal hin?
+		emit_signal("new_generation")#TODO wo ging/ging das Signal mal hin?
 		$Population.next_generation()
 		gen_count = gen_count + 1
 		emit_signal("generation_count_label", gen_count)

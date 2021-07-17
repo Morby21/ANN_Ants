@@ -3,17 +3,14 @@ extends Node
 ### Global variables ##########################################################
 
 var population_size
+var selected_tile: int
 
 #var MainMenu = get_tree().get_root().get_node("/root/MainMenu") 
+#onready var MainMenu = get_tree().get_root().get_node("MainMenu") 
 
 ###############################################################################
 var Ant_Individium : PackedScene = preload("res://scenes/Ant_0.5.tscn")
 var Ants_Population = preload("res://scenes/Ants_Population.tscn")
-
-
-var Level_01_Standard = preload("res://scenes/Level_01_Standard.tscn")
-var Level_02_Training = preload("res://scenes/Level_02_Training.tscn")
-
 var Ants_Population_Instance = null
 var current_scene = null
 
@@ -25,7 +22,7 @@ func _ready():
 	#current_scene = root.get_child(root.get_child_count() - 1)
 
 
-func goto_scene(path, hookoff_ants_population:bool, hookup_ants_population:bool):
+func goto_scene(path, hookup_ants_population:bool):
 	## https://docs.godotengine.org/en/stable/getting_started/step_by_step/singletons_autoload.html
 	##
 	## This function will usually be called from a signal callback,
@@ -36,11 +33,11 @@ func goto_scene(path, hookoff_ants_population:bool, hookup_ants_population:bool)
 	##
 	## The solution is to defer the load to a later time, when
 	## we can be sure that no code from the current scene is running:
-	call_deferred("_deferred_goto_scene", path, hookoff_ants_population, hookup_ants_population)
+	call_deferred("_deferred_goto_scene", path, hookup_ants_population)
 
 
-func _deferred_goto_scene(path, hookoff_ants_population, hookup_ants_population):
-	if hookoff_ants_population:
+func _deferred_goto_scene(path, hookup_ants_population):
+	if current_scene != null:
 		current_scene.remove_child(Ants_Population_Instance)
 	
 	if current_scene != null:
@@ -56,7 +53,8 @@ func _deferred_goto_scene(path, hookoff_ants_population, hookup_ants_population)
 	get_tree().get_root().add_child(current_scene)
 	## Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
-		
+	print("Current scene: ", current_scene.name)
+	
 	if hookup_ants_population == true:
 		current_scene.add_child(Ants_Population_Instance)
 
@@ -65,8 +63,8 @@ func NewGame_pressed():
 	Ants_Population_Instance = Ants_Population.instance()
 	Ants_Population_Instance.get_child(0).size = population_size.text.to_int()
 	Ants_Population_Instance.get_child(0).organism_parent_scene = Ant_Individium
-	goto_scene("res://scenes/Level_01_Standard.tscn", false, true)
-
+	goto_scene("res://scenes/Level_01_Standard.tscn", true)
+	#get_tree().get_root().get_node("MainMenu").hide()
 	#MainMenu.hide() #FIXME !!!!!
 
 
@@ -86,19 +84,6 @@ func Exit_Game():
 	get_tree().quit()
 
 
-func Next_Level(): #HACK
-	
-
-	if current_scene.name == "Level_01_Standard":
-		goto_scene("res://scenes/Level_02_Training.tscn", true, true)
-		#current_scene = Level_02_Training.instance()
-	else: 
-		goto_scene("res://scenes/Level_01_Standard.tscn", true, true)
-		#current_scene = Level_01_Standard.instance()
-	#get_tree().get_root().add_child(current_scene)
-	#current_scene.add_child(Ants_Population_Instance)
-
-
 ### Private variables #########################################################
 #https://godotengine.org/qa/7983/private-vars-inside-custom-godot-script-class
 #var my_good_private_x = 6 setget private_gs,private_gs
@@ -115,3 +100,24 @@ func Next_Level(): #HACK
 #    my_good_private_x = 54 # works!
 #    print(my_good_private_x) # 54
 #    self.my_better_private_y = 23 # migth work, depends on which version of godot you use
+#
+###############################################################################
+
+#https://docs.godotengine.org/de/stable/tutorials/inputs/input_examples.html
+#
+#var dragging = false
+#var click_radius = 32 # Size of the sprite.
+#
+#func _input(event):
+#    if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
+#        if (event.position - $Sprite.position).length() < click_radius:
+#            # Start dragging if the click is on the sprite.
+#            if not dragging and event.pressed:
+#                dragging = true
+#        # Stop dragging if the button is released.
+#        if dragging and not event.pressed:
+#            dragging = false
+#
+#    if event is InputEventMouseMotion and dragging:
+#        # While dragging, move the sprite with the mouse.
+#        $Sprite.position = event.position

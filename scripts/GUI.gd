@@ -8,20 +8,39 @@ onready var AntsSpawned_var = $Top/Top_Left/Ants_Spawned/Var
 onready var AntsAlive_var = $Top/Top_Left/Ants_Alive/Var
 
 ### GUI - Top_Right ###########################################################
+onready var Btn_TileSelection = $Top/Top_Right/Btn_Tile_selection
+onready var Btn_LevelSelection = $Top/Top_Right/Btn_Level_selection
 onready var Btn_KillAllAnts = $Top/Top_Right/Btn_KillAllAnts
 onready var Btn_PauseContinue = $Top/Top_Right/Btn_PauseContinue
 onready var Btn_Menu = $Top/Top_Right/Btn_Menu
-
-
 ### Other #####################################################################
 var spawned_ants_max
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	addItems_Btn_Level_Selection(Btn_LevelSelection)
+	addItems_Btn_Tile_Selection(Btn_TileSelection)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#	pass
+
+func addItems_Btn_Level_Selection(Btn):
+	Btn.add_item("Select Level")
+	Btn.add_separator()
+	Btn.add_item("Standard Level")
+	Btn.add_item("Training 1: Collision")
+	Btn.add_item("Training 2: Search new Tiles")
+	
+#	Btn.set_item_disabled(2, true)
+#	Btn.set_item_text(2, "Disabled")
+
+
+func addItems_Btn_Tile_Selection(Btn):
+	Btn.add_item("Select Tile")
+	Btn.add_separator()
+	Btn.add_item("NA - Lake")
+	Btn.add_item("Trail")
+	Btn.add_item("Gras")
+	Btn.add_item("Used Gras")
+	Btn.add_item("Trees")
 
 
 func _on_Ants_World_generation_count_label(gen_count):
@@ -41,10 +60,10 @@ func _on_Ants_World_game_paused_byScript():
 
 
 func _on_Btn_NextLevel_pressed():
-	Global.Next_Level()
+	pass #TODO delete Button
 
 
-func _on_Btn_KillAllAnts2_pressed():
+func _on_Btn_KillAllAnts_pressed():
 	emit_signal("btn_KillAllAnts_pressed")
 
 
@@ -60,3 +79,14 @@ func _on_Btn_PauseContinue2_pressed():
 
 func _on_Btn_Menu_pressed():
 	Global.Menu_Button()
+
+
+func _on_Btn_Level_selection_item_selected(index):
+	if index == 2:
+		Global.goto_scene("res://scenes/Level_01_Standard.tscn", true)
+	if index == 3:
+		Global.goto_scene("res://scenes/Level_02_Training.tscn", true)
+
+
+func _on_Btn_Tile_selection2_item_selected(index):
+	Global.selected_tile = index-2
