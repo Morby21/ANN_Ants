@@ -29,6 +29,7 @@ onready var Option_value_lifeTimer = $HBoxContainer/CenterContainer_Options/Opti
 onready var Option_maxLifeTimer = $HBoxContainer/CenterContainer_Options/Option_List/Option_maxLifeTimer/CheckButton
 onready var Option_value_maxLifeTimer = $HBoxContainer/CenterContainer_Options/Option_List/Option_value_maxLifeTimer/LineEdit
 
+
 func _ready():
 	#Initialise Option Settings
 	Option_population_size.text = str(Global.Option_population_size)
@@ -48,18 +49,6 @@ func _ready():
 	if Global.current_scene != null:
 		Btn_Continue.show()
 
-#	Global.Option_population_size = $HBoxContainer/CenterContainer_Options/Option_List/Option_population_size/LineEdit
-#	Global.Option_Input_DistanceToNest  = $HBoxContainer/CenterContainer_Options/Option_List/Option_Input_DistanceToNest/CheckButton
-#	Global.Option_Input_Rotation = $HBoxContainer/CenterContainer_Options/Option_List/Option_Input_Rotation/CheckButton
-#	Global.Option_Input_Coordinations = $HBoxContainer/CenterContainer_Options/Option_List/Option_Input_Coordinations/CheckButton
-#	Global.Option_Input_CollisionDetection = $HBoxContainer/CenterContainer_Options/Option_List/Option_Input_CollisionDetection/CheckButton
-#	Global.Option_Input_TileDetection = $HBoxContainer/CenterContainer_Options/Option_List/Option_Input_TileDetection/CheckButton
-#	Global.Option_Auto_HiddenLayerSizes = $HBoxContainer/CenterContainer_Options/Option_List/Option_Auto_HiddenLayerSizes/CheckButton
-#	Global.Option_value_HiddenLayerSizes = $HBoxContainer/CenterContainer_Options/Option_List/Option_value_HiddenLayerSizes/LineEdit
-#	Global.Option_lifeTimer = $HBoxContainer/CenterContainer_Options/Option_List/Option_lifeTimer/CheckButton
-#	Global.Option_value_lifeTimer = $HBoxContainer/CenterContainer_Options/Option_List/Option_value_lifeTimer/LineEdit
-#	Global.Option_maxLifeTimer = $HBoxContainer/CenterContainer_Options/Option_List/Option_maxLifeTimer/CheckButton
-#	Global.Option_value_maxLifeTimer = $HBoxContainer/CenterContainer_Options/Option_List/Option_value_maxLifeTimer/LineEdit
 
 func saveOptions_on_NewGameBtn():
 	Global.Option_population_size = Option_population_size.text.to_int()
@@ -116,14 +105,12 @@ func _on_NewGame_mouse_exited():
 
 func _on_Options_mouse_entered():
 	mouseOn_Options = true
-	print("fufuda")
 func _on_Options_mouse_exited():
 	mouseOn_Options = false
 
 
 func _on_Exit_mouse_entered():
 	mouseOn_Exit = true
-	print("fafa")
 func _on_Exit_mouse_exited():
 	mouseOn_Exit = false
 

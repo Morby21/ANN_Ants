@@ -1,18 +1,18 @@
-extends MarginContainer
+extends CanvasLayer
 
 signal btn_KillAllAnts_pressed
 
 ### GUI - Top_Left ############################################################
-onready var GenCount_var = $Top/Top_Left/Generation_Counter/Var
-onready var AntsSpawned_var = $Top/Top_Left/Ants_Spawned/Var
-onready var AntsAlive_var = $Top/Top_Left/Ants_Alive/Var
+onready var GenCount_var = $MarginContainer/Top/Top_Left/Generation_Counter/Var
+onready var AntsSpawned_var = $MarginContainer/Top/Top_Left/Ants_Spawned/Var
+onready var AntsAlive_var = $MarginContainer/Top/Top_Left/Ants_Alive/Var
 
 ### GUI - Top_Right ###########################################################
-onready var Btn_TileSelection = $Top/Top_Right/Btn_Tile_selection
-onready var Btn_LevelSelection = $Top/Top_Right/Btn_Level_selection
-onready var Btn_KillAllAnts = $Top/Top_Right/Btn_KillAllAnts
-onready var Btn_PauseContinue = $Top/Top_Right/Btn_PauseContinue
-onready var Btn_Menu = $Top/Top_Right/Btn_Menu
+onready var Btn_TileSelection = $MarginContainer/Top/Top_Right/Btn_Tile_selection
+onready var Btn_LevelSelection = $MarginContainer/Top/Top_Right/Btn_Level_selection
+onready var Btn_KillAllAnts = $MarginContainer/Top/Top_Right/Btn_KillAllAnts
+onready var Btn_PauseContinue = $MarginContainer/Top/Top_Right/Btn_PauseContinue
+onready var Btn_Menu = $MarginContainer/Top/Top_Right/Btn_Menu
 ### Other #####################################################################
 var spawned_ants_max
 
@@ -33,7 +33,7 @@ func addItems_Btn_Tile_Selection(Btn):
 	
 #	Btn.set_item_disabled(2, true)
 #	Btn.set_item_text(2, "Disabled")
-func _on_Btn_Tile_selection2_item_selected(index):
+func _on_Btn_Tile_selection_item_selected(index):
 	Global.selected_tile = index-2
 
 
@@ -44,9 +44,9 @@ func addItems_Btn_Level_Selection(Btn):
 	Btn.add_item("Training 2: Search new Tiles")
 func _on_Btn_Level_selection_item_selected(index):
 	if index == 0:
-		Global.goto_scene("res://scenes/Level_01_Standard.tscn", true, true)
+		Global.goto_scene("res://scenes/Level_01_Standard.tscn")
 	if index == 2:
-		Global.goto_scene("res://scenes/Level_02_Training.tscn", true, true)
+		Global.goto_scene("res://scenes/Level_02_Training.tscn")
 
 
 func _on_Ants_World_generation_count_label(gen_count):
@@ -73,7 +73,11 @@ func _on_Btn_KillAllAnts_pressed():
 	emit_signal("btn_KillAllAnts_pressed")
 
 
-func _on_Btn_PauseContinue2_pressed():
+func _on_Btn_Menu_pressed():
+	Global.Menu_Button()
+
+
+func _on_Btn_PauseContinue_pressed():
 	if Btn_PauseContinue.text == "Pause":
 		Btn_PauseContinue.text = "Continue"
 		get_tree().paused = true
@@ -81,7 +85,3 @@ func _on_Btn_PauseContinue2_pressed():
 	else:
 		Btn_PauseContinue.text = "Pause"
 		get_tree().paused = false
-
-
-func _on_Btn_Menu_pressed():
-	Global.Menu_Button()

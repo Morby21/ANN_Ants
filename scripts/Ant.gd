@@ -19,7 +19,8 @@ var is_dead : bool = false #Ant isn't alive
 var is_ready:bool = false #Ant is finished learning and is ready for population
 var is_spawned:bool = true
 
-var start_tile : Vector2 = Vector2(29, 14) #ants starting position on tileMap
+onready var start_tile : Vector2 = get_parent().get_parent().get_parent().get_HivePosition() #ants starting position on tileMap
+
 var mapPosition_ant #ants actual position on tileMap
 var mapPosition_ant_before #ants old position on tileMap
 var last_used_tiles:Array #memory of last used tiles
@@ -93,8 +94,7 @@ func _physics_process(_delta):
 	if !is_dead: #"While" ant is living
 		inputs = [] #Reset Array
 		mapPosition_ant = AntsTileMap.world_to_map(self.position) 
-		distance_to_home = (self.position).distance_to(AntsTileMap.map_to_world(start_tile))
-		
+		distance_to_home = (self.position).distance_to(start_tile)
 		if Global.Option_Input_DistanceToNest:
 			inputs.insert(inputs.size(), distance_to_home/map_size)
 		
@@ -256,7 +256,8 @@ func reset() -> void:
 #	var min_rotation = 0
 #	var max_rotation = 359
 #	var random_rotation = rand_range(min_rotation, max_rotation)
-	transform = Transform2D(0, Vector2(180,100)) #Resets the 2D-Rotation and 2D-Position by "transform" in Inspektor 
+	start_tile = get_parent().get_parent().get_parent().get_HivePosition()
+	transform = Transform2D(0, start_tile) #Resets the 2D-Rotation and 2D-Position by "transform" in Inspektor 
 
 
 func respawn() -> void:
