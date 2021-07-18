@@ -8,8 +8,6 @@ var selected_tile: int
 var population_size
 
 
-
-
 #-- MainMenu-Options (and its Standard values)---------------------------------
 var Option_population_size = 20
 var Option_Input_DistanceToNest = true
@@ -30,6 +28,11 @@ onready var MainMenu = get_tree().get_root().get_node("MainMenu")
 var Ant_Individium : PackedScene = preload("res://scenes/Ant_0.5.tscn")
 var Ants_Population = preload("res://scenes/Ants_Population.tscn")
 var Ants_Population_Instance = null
+var CanvasGUI = preload("res://scenes/GUI.tscn")
+var CanvasGUI_Instance = null
+
+#var MainMenu_load = ResourceLoader.load("res://scenes/MainMenu.tscn") #TODO preload on
+
 var current_scene = null
 
 
@@ -57,24 +60,26 @@ func goto_scene(path, hookup_ants_population:bool):
 func _deferred_goto_scene(path, hookup_ants_population):
 	if current_scene != null:
 		current_scene.remove_child(Ants_Population_Instance)
+		current_scene.get_node("CanvasLayer").remove_child(CanvasGUI_Instance)
 	
 	if current_scene != null:
 		current_scene.free()
 	
 	## Load the new scene.
-	var s = ResourceLoader.load(path)
+	var scene = ResourceLoader.load(path)
 	
 	## Instance the new scene.
-	current_scene = s.instance()
+	current_scene = scene.instance()
 	
 	## Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
 	## Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
-	print("Current scene: ", current_scene.name)
 	
 	if hookup_ants_population == true:
+		current_scene.get_node("CanvasLayer").add_child(CanvasGUI_Instance)
 		current_scene.add_child(Ants_Population_Instance)
+		
 
 
 func Continue_pressed():
@@ -84,6 +89,7 @@ func Continue_pressed():
 
 
 func NewGame_pressed():
+	CanvasGUI_Instance = CanvasGUI.instance()
 	Ants_Population_Instance = Ants_Population.instance()
 	Ants_Population_Instance.get_child(0).size = Option_population_size
 	#TODO Hiddenlayers
