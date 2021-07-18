@@ -22,29 +22,27 @@ var Option_value_lifeTimer = 3000
 var Option_maxLifeTimer = true
 var Option_value_maxLifeTimer = 15000
 
-
-onready var MainMenu = get_tree().get_root().get_node("MainMenu") 
 ###############################################################################
+onready var MainMenu = get_tree().get_root().get_node("MainMenu") 
+
 var Ant_Individium : PackedScene = preload("res://scenes/Ant_0.5.tscn")
 var Ants_Population = preload("res://scenes/Ants_Population.tscn")
 var Ants_Population_Instance = null
 var CanvasGUI = preload("res://scenes/GUI.tscn")
 var CanvasGUI_Instance = null
 
-#var MainMenu_load = ResourceLoader.load("res://scenes/MainMenu.tscn") #TODO preload on
-
 var current_scene = null
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
-	#var root = get_tree().get_root()
-	#current_scene = root.get_child(root.get_child_count() - 1)
+	## var root = get_tree().get_root()
+	## current_scene = root.get_child(root.get_child_count() - 1)
 
 
-func goto_scene(path, hookup_ants_population:bool):
-	## https://docs.godotengine.org/en/stable/getting_started/step_by_step/singletons_autoload.html
+func goto_scene(path, hookup_GUI, hookup_ants_population:bool):
+	## #https://docs.godotengine.org/en/stable/getting_started/step_by_step/singletons_autoload.html
+	## #(Douple Hashtags shows original comments of the source-link-project)
 	##
 	## This function will usually be called from a signal callback,
 	## or some other function in the current scene.
@@ -54,32 +52,34 @@ func goto_scene(path, hookup_ants_population:bool):
 	##
 	## The solution is to defer the load to a later time, when
 	## we can be sure that no code from the current scene is running:
-	call_deferred("_deferred_goto_scene", path, hookup_ants_population)
+	call_deferred("_deferred_goto_scene", path, hookup_GUI, hookup_ants_population)
 
 
-func _deferred_goto_scene(path, hookup_ants_population):
+func _deferred_goto_scene(path, hookup_GUI, hookup_ants_population):
+	# If availible, hookoff instances to save them
 	if current_scene != null:
-		current_scene.remove_child(Ants_Population_Instance)
-		current_scene.get_node("CanvasLayer").remove_child(CanvasGUI_Instance)
+		if current_scene.get_node("CanvasLayer").has_node("GUI"):
+			current_scene.get_node("CanvasLayer").remove_child(CanvasGUI_Instance)
+		if current_scene.has_node("Ants_Population"):
+			current_scene.remove_child(Ants_Population_Instance)
 	
+	# Switch scenes
 	if current_scene != null:
 		current_scene.free()
-	
 	## Load the new scene.
 	var scene = ResourceLoader.load(path)
-	
 	## Instance the new scene.
 	current_scene = scene.instance()
-	
 	## Add it to the active scene, as child of root.
 	get_tree().get_root().add_child(current_scene)
 	## Optionally, to make it compatible with the SceneTree.change_scene() API.
 	get_tree().set_current_scene(current_scene)
 	
-	if hookup_ants_population == true:
+	# If needed in scene, hookup saved instances 
+	if hookup_GUI == true:
 		current_scene.get_node("CanvasLayer").add_child(CanvasGUI_Instance)
+	if hookup_ants_population == true:
 		current_scene.add_child(Ants_Population_Instance)
-		
 
 
 func Continue_pressed():
@@ -94,7 +94,7 @@ func NewGame_pressed():
 	Ants_Population_Instance.get_child(0).size = Option_population_size
 	#TODO Hiddenlayers
 	Ants_Population_Instance.get_child(0).organism_parent_scene = Ant_Individium
-	goto_scene("res://scenes/Level_01_Standard.tscn", true)
+	goto_scene("res://scenes/Level_01_Standard.tscn", true, true)
 	MainMenu.queue_free()
 
 
