@@ -37,6 +37,8 @@ func _physics_process(_delta):
 	print_population_status() # !Call before var everybody_ready is resetted
 	
 	if everybody_ready:
+		if gen_count > 5: #TODO: replace 5 with a variable
+			replace_stupid_ants()
 		emit_signal("new_generation")#TODO wo ging/ging das Signal mal hin?
 		$Population.next_generation()
 		gen_count = gen_count + 1
@@ -72,3 +74,27 @@ func _on_GUI_btn_KillAllAnts_pressed():
 	for child in $Population.get_children():
 		child.killThisOrganism(4)
 	tile_reset() 
+
+
+func replace_stupid_ants():
+	var best_ant : Ant = $Population.get_best()
+	var fitness_of_best_ant = best_ant.get_node("Organism").get_fitness()
+	var stupid_ants : Array
+	var smart_ants : Array
+	for child in $Population.get_children():
+		var fitness_of_ant = child.get_node("Organism").get_fitness()
+		if fitness_of_ant < fitness_of_best_ant / 10: #TODO: replace 10 with a variable
+			stupid_ants.append(child)
+		if fitness_of_ant > fitness_of_best_ant / 10: #TODO: replace 10 with a variable (can be a different one than the one above)
+			smart_ants.append(child)
+	for ant in stupid_ants:
+		var randomly_picked_smart_dna = smart_ants[randi() % smart_ants.size()]
+		ant.get_node("Organism").set_dna(randomly_picked_smart_dna)
+
+
+
+
+
+
+
+

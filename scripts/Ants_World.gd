@@ -34,7 +34,7 @@ func _physics_process(_delta):
 
 	if everybody_ready:
 		emit_signal("new_generation")
-		$Population.next_generation()
+		$Population.next_generation() #This is not used... Ants_World is not used at all.
 		gen_count = gen_count + 1
 		emit_signal("generation_count_label", gen_count)
 		spawn_timer = 0

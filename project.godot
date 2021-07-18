@@ -10,6 +10,11 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "KinematicBody2D",
+"class": "Ant",
+"language": "GDScript",
+"path": "res://scripts/Ant.gd"
+}, {
+"base": "KinematicBody2D",
 "class": "TopCamera",
 "language": "GDScript",
 "path": "res://scripts/Cam.gd"
@@ -20,6 +25,7 @@ _global_script_classes=[ {
 "path": "res://scripts/Camera2D.gd"
 } ]
 _global_script_class_icons={
+"Ant": "",
 "TopCamera": "",
 "ZoomingCamera2D": ""
 }
