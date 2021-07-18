@@ -37,6 +37,8 @@ func _physics_process(_delta):
 	print_population_status() # !Call before var everybody_ready is resetted
 	
 	if everybody_ready:
+		if gen_count > 5: #TODO: replace 5 with a variable
+			replace_stupid_ants()
 		emit_signal("new_generation")#TODO wo ging/ging das Signal mal hin?
 		$Population.next_generation()
 		gen_count = gen_count + 1
