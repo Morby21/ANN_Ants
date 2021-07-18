@@ -4,17 +4,17 @@
 [ext_resource path="res://scripts/MainMenu.gd" type="Script" id=7]
 [ext_resource path="res://materials/fonts/old typewriter font/PARPG.ttf" type="DynamicFontData" id=8]
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=1]
 size = 56
 outline_size = 4
 outline_color = Color( 0.129412, 0.129412, 0.129412, 1 )
 extra_spacing_space = 18
 font_data = ExtResource( 8 )
 
-[sub_resource type="Theme" id=5]
-default_font = SubResource( 4 )
+[sub_resource type="Theme" id=2]
+default_font = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=3]
 size = 50
 outline_size = 3
 outline_color = Color( 0.129412, 0.129412, 0.129412, 1 )
@@ -23,26 +23,26 @@ extra_spacing_bottom = -12
 extra_spacing_space = 19
 font_data = ExtResource( 8 )
 
-[sub_resource type="Theme" id=9]
-default_font = SubResource( 8 )
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=5]
 outline_size = 2
 outline_color = Color( 0.129412, 0.129412, 0.129412, 1 )
 extra_spacing_space = 5
 font_data = ExtResource( 8 )
 
-[sub_resource type="Theme" id=11]
-default_font = SubResource( 10 )
+[sub_resource type="Theme" id=6]
+default_font = SubResource( 5 )
 
-[sub_resource type="DynamicFont" id=12]
+[sub_resource type="DynamicFont" id=7]
 outline_size = 1
 outline_color = Color( 0.129412, 0.129412, 0.129412, 1 )
 extra_spacing_space = 8
 font_data = ExtResource( 8 )
 
-[sub_resource type="Theme" id=13]
-default_font = SubResource( 12 )
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
 
 [node name="MainMenu" type="MarginContainer"]
 anchor_right = 1.0
@@ -69,7 +69,7 @@ margin_bottom = 672.0
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_right = 551.0
 margin_bottom = 73.0
-theme = SubResource( 5 )
+theme = SubResource( 2 )
 alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer"]
@@ -91,7 +91,7 @@ margin_top = 77.0
 margin_right = 551.0
 margin_bottom = 646.0
 size_flags_vertical = 3
-theme = SubResource( 9 )
+theme = SubResource( 4 )
 custom_constants/separation = 30
 alignment = 1
 
@@ -128,7 +128,7 @@ text = "Exit"
 margin_top = 650.0
 margin_right = 551.0
 margin_bottom = 672.0
-theme = SubResource( 11 )
+theme = SubResource( 6 )
 
 [node name="version" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
 margin_right = 146.0
@@ -144,7 +144,7 @@ margin_right = 1126.0
 margin_bottom = 672.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme = SubResource( 13 )
+theme = SubResource( 8 )
 
 [node name="Label" type="Label" parent="HBoxContainer/CenterContainer_noOptions"]
 margin_left = 7.0

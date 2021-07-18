@@ -18,19 +18,8 @@ var spawned_ants_max
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	addItems_Btn_Level_Selection(Btn_LevelSelection)
 	addItems_Btn_Tile_Selection(Btn_TileSelection)
-
-
-func addItems_Btn_Level_Selection(Btn):
-	Btn.add_item("Select Level")
-	Btn.add_separator()
-	Btn.add_item("Standard Level")
-	Btn.add_item("Training 1: Collision")
-	Btn.add_item("Training 2: Search new Tiles")
-	
-#	Btn.set_item_disabled(2, true)
-#	Btn.set_item_text(2, "Disabled")
+	addItems_Btn_Level_Selection(Btn_LevelSelection)
 
 
 func addItems_Btn_Tile_Selection(Btn):
@@ -41,6 +30,23 @@ func addItems_Btn_Tile_Selection(Btn):
 	Btn.add_item("Gras")
 	Btn.add_item("Used Gras")
 	Btn.add_item("Trees")
+	
+#	Btn.set_item_disabled(2, true)
+#	Btn.set_item_text(2, "Disabled")
+func _on_Btn_Tile_selection2_item_selected(index):
+	Global.selected_tile = index-2
+
+
+func addItems_Btn_Level_Selection(Btn):
+	Btn.add_item("Standard Level")
+	Btn.add_separator()
+	Btn.add_item("Training 1: Collision")
+	Btn.add_item("Training 2: Search new Tiles")
+func _on_Btn_Level_selection_item_selected(index):
+	if index == 0:
+		Global.goto_scene("res://scenes/Level_01_Standard.tscn", true, true)
+	if index == 2:
+		Global.goto_scene("res://scenes/Level_02_Training.tscn", true, true)
 
 
 func _on_Ants_World_generation_count_label(gen_count):
@@ -79,14 +85,3 @@ func _on_Btn_PauseContinue2_pressed():
 
 func _on_Btn_Menu_pressed():
 	Global.Menu_Button()
-
-
-func _on_Btn_Level_selection_item_selected(index):
-	if index == 2:
-		Global.goto_scene("res://scenes/Level_01_Standard.tscn", true)
-	if index == 3:
-		Global.goto_scene("res://scenes/Level_02_Training.tscn", true)
-
-
-func _on_Btn_Tile_selection2_item_selected(index):
-	Global.selected_tile = index-2
