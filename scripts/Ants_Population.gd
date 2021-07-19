@@ -17,7 +17,7 @@ var gen_count = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var GUI = get_parent().get_node("CanvasLayer").get_node("GUI")
+	var GUI = get_parent().get_node("GUI")
 	connect("generation_count_label", GUI, "_on_Ants_World_generation_count_label")
 	connect("living_ants_label", GUI, "_on_Ants_World_living_ants_label")
 	connect("spawned_ants_label", GUI, "_on_Ants_World_spawned_ants_label")
