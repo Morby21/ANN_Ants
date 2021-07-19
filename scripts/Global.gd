@@ -3,6 +3,8 @@ extends Node
 ### Global variables ##########################################################
 #-- General -------------------------------------------------------------------
 var selected_tile: int
+var tool_is_selecting: bool = false
+var tool_is_dragging: bool = false
 
 #-- Ant Population/Organism ---------------------------------------------------
 var population_size

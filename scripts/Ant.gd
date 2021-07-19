@@ -2,8 +2,12 @@ extends KinematicBody2D
 
 class_name Ant
 
-signal ant_motivation_label(a)
 signal ant_name_label(a)
+signal ant_fitness_label(a)
+signal ant_motivation_label(a)
+signal tile_detection_label(a,b)
+signal collision_detection_label(a,b)
+signal distance_to_home_label(a)
 
 var AntsTileMap
 
@@ -97,8 +101,13 @@ func _physics_process(_delta):
 	if is_selected:
 		if !is_connected_to_GUI:
 			connect("ant_name_label", GUI, "_on_Ant_ant_name_label")
+			connect("ant_fitness_label", GUI, "_on_Ant_ant_fitness_label")
 			connect("ant_motivation_label", GUI, "_on_Ant_ant_motivation_label")
+			connect("tile_detection_label", GUI, "_on_Ant_tile_detection_label")
+			connect("collision_detection_label", GUI, "_on_Ant_collision_detection_label")
+			connect("distance_to_home_label", GUI, "_on_Ant_distance_to_home_label")
 			is_connected_to_GUI = true
+		emit_signal("ant_fitness_label", $Organism.get_fitness())
 	
 	AntsTileMap = get_parent().get_parent().get_parent().get_TileMap()
 	if spawn:
@@ -111,6 +120,8 @@ func _physics_process(_delta):
 		mapPosition_ant = AntsTileMap.world_to_map(self.position) 
 		distance_to_home = (self.position).distance_to(start_tile)
 		if Global.Option_Input_DistanceToNest:
+			if is_selected:
+				emit_signal("distance_to_home_label", distance_to_home/map_size)
 			inputs.insert(inputs.size(), distance_to_home/map_size)
 		
 		if Global.Option_Input_Rotation:
@@ -194,9 +205,8 @@ func scan_for_collision() -> void:
 	var antennae_right : float = normalizeDistance(rightCollisionDistance)
 	
 	if Global.Option_Input_CollisionDetection:
-#		if is_selected:
-#			print("CollisionDistance: ", leftCollisionDistance, " - ", rightCollisionDistance)
-#			print("Antennae: ", antennae_left, " - ", antennae_right)
+		if is_selected:
+			emit_signal("collision_detection_label", antennae_left, antennae_right)
 		inputs.insert(inputs.size(), antennae_left)
 		inputs.insert(inputs.size(), antennae_right)
 
@@ -212,7 +222,7 @@ func scan_for_tiles() -> void:
 	
 	if Global.Option_Input_TileDetection:
 		if is_selected:
-			print("normalizedTileIndex_leftAntennae: ", normalizedTileIndex_leftAntennae, " - ", normalizedTileIndex_rightAntennae)
+			emit_signal("tile_detection_label", normalizedTileIndex_leftAntennae,normalizedTileIndex_rightAntennae)
 		inputs.insert(inputs.size(), normalizedTileIndex_leftAntennae)
 		inputs.insert(inputs.size(), normalizedTileIndex_rightAntennae)
 	
@@ -321,9 +331,9 @@ func killThisOrganism(kill_reason:int) -> void:
 	
 	
 func normalizeDistance(distanceToNormalize : float) -> float:
-	if distanceToNormalize > 100:
+	if distanceToNormalize > 4000: #FIXME
 		return 1.0
-	return distanceToNormalize / 100
+	return distanceToNormalize / 4000
 
 
 func normalizeTile(tile_index : float) -> float:

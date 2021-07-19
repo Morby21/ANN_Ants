@@ -1,7 +1,5 @@
 extends Node2D
 
-var operation_is_selecting: bool = true
-var operation_is_dragging: bool = false
 var dragging = false
 var click_radius_ant = 40 # Size of the sprite.
 var click_radius_hive = 250 # Size of the sprite.
@@ -33,7 +31,7 @@ func get_HivePosition():
 
 
 func _input(event):
-	if operation_is_selecting:
+	if Global.tool_is_selecting:
 		var Ants_Population = get_node("Ants_Population")
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 			Ants_Population.unselect_all_ants()
@@ -44,7 +42,7 @@ func _input(event):
 					Ants_Population.selected_ant_position(index)
 				index = index +1
 	
-	if operation_is_dragging:
+	if Global.tool_is_dragging:
 		# Get Position for draging but the zoom: https://www.reddit.com/r/godot/comments/gj4yev/convert_eventposition_mouse_to_local_position_in/
 		if event is InputEventMouseButton and event.button_index == BUTTON_LEFT:
 			if (get_viewport().canvas_transform.affine_inverse().xform(event.position) - get_node("Objects").get_node("Object_Hive").position).length() < click_radius_hive:

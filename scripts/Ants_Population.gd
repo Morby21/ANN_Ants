@@ -1,10 +1,13 @@
 extends Node
 
 signal new_generation
+signal ant_is_selected
+signal no_ant_is_selected
 signal generation_count_label(generation_count)
 signal living_ants_label(a)
 signal spawned_ants_label(a)
 signal left_daytime_label(a)
+
 
 export var spawn_timer_value : int = 30
 
@@ -19,6 +22,8 @@ var max_life_timer : int = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var GUI = get_parent().get_node("GUI")
+	connect("ant_is_selected", GUI, "_on_Ants_Population_AntIsSelected")
+	connect("no_ant_is_selected", GUI, "_on_Ants_Population_noAntIsSelected")
 	connect("generation_count_label", GUI, "_on_Ants_Population_generation_count_label")
 	connect("living_ants_label", GUI, "_on_Ants_Population_living_ants_label")
 	connect("spawned_ants_label", GUI, "_on_Ants_Population_spawned_ants_label")
@@ -90,8 +95,8 @@ func _on_GUI_btn_KillAllAnts_pressed():
 func replace_stupid_ants():
 	var best_ant : Ant = $Population.get_best()
 	var fitness_of_best_ant = best_ant.get_node("Organism").get_fitness()
-	var stupid_ants : Array
-	var smart_ants : Array
+	var stupid_ants : Array = []
+	var smart_ants : Array = []
 	for child in $Population.get_children():
 		var fitness_of_ant = child.get_node("Organism").get_fitness()
 		if fitness_of_ant < fitness_of_best_ant / 10: #TODO: replace 10 with a variable
@@ -113,9 +118,11 @@ func get_all_ant_positions():
 
 func selected_ant_position(population_child_index):
 	$Population.get_child(population_child_index).select_ant()
+	emit_signal("ant_is_selected")
 
 func unselect_all_ants():
 	for child in $Population.get_children():
 		child.unselect_ant()
+	emit_signal("no_ant_is_selected")
 
 

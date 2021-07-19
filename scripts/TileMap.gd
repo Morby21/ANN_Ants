@@ -10,7 +10,7 @@ func _ready():
 	set_process_input(true) #HACK Nötig?
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if draw_tiles:
 		selected_tile = Global.selected_tile
 		tile_position = world_to_map(get_global_mouse_position())
