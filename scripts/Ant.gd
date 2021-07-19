@@ -18,6 +18,7 @@ var spawn : bool = false
 var is_dead : bool = false #Ant isn't alive
 var is_ready:bool = false #Ant is finished learning and is ready for population
 var is_spawned:bool = true
+var is_selected: bool = false #Ant is selected by mouse-click
 
 onready var start_tile : Vector2 = get_parent().get_parent().get_parent().get_HivePosition() #ants starting position on tileMap
 

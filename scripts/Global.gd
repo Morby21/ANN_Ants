@@ -7,7 +7,6 @@ var selected_tile: int
 #-- Ant Population/Organism ---------------------------------------------------
 var population_size
 
-
 #-- MainMenu-Options (and its Standard values)---------------------------------
 var Option_population_size = 20
 var Option_Input_DistanceToNest = true

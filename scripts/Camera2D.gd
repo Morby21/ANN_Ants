@@ -1,66 +1,54 @@
-class_name ZoomingCamera2D
+
 extends Camera2D
-#-------------------
-#https://godotengine.org/qa/24969/how-to-drag-camera-with-mouse
-var mouse_start_pos
-var screen_start_position
 
-var dragging = false
-#-------------------
+func _ready():
+	_update_zoom(0.25, get_local_mouse_position())
+	print("ready")
+	
+# https://www.braindead.bzh/entry/godot-interactive-camera2d
+# Written by Olivier Boucard on Tuesday February 7, 2017
+# You can find below a very simple script that you can attach to any Camera2D node within Godot Engine. It provides the following functionality:
+#    Moving the camera using the mouse
+#    Zoom centered on mouse cursor
+#    Rebindable actions through Godot's Input Map
+#    Signal emitting if you need to make other nodes react to camera movement or zoom
 
-# Lower cap for the `_zoom_level`.
-export var min_zoom := 0.5 #Standard 0.5
-# Upper cap for the `_zoom_level`.
-export var max_zoom := 4.0 #Standard 2.0
-# Controls how much we increase or decrease the `_zoom_level` on every turn of the scroll wheel.
-export var zoom_factor := 0.2 #Standard 0.1
-# Duration of the zoom's tween animation.
-export var zoom_duration := 0.1 #Standard 0.2
+const MAX_ZOOM_LEVEL = 0.5
+const MIN_ZOOM_LEVEL = 6.0
+const ZOOM_INCREMENT = 0.25
 
-# The camera's target zoom level.
-var _zoom_level := 1.0 setget _set_zoom_level #Standard 1.0
+signal moved()
+signal zoomed()
 
-# We store a reference to the scene's tween node.
-onready var tween: Tween = $Tween
+var _current_zoom_level = 4 
+var _drag = false
 
-func _set_zoom_level(value: float) -> void:
-	# We limit the value between `min_zoom` and `max_zoom`
-	_zoom_level = clamp(value, min_zoom, max_zoom)
-	# Then, we ask the tween node to animate the camera's `zoom` property from its current value
-	# to the target zoom level.
-	tween.interpolate_property(
-		self,
-		"zoom",
-		zoom,
-		Vector2(_zoom_level, _zoom_level),
-		zoom_duration,
-		tween.TRANS_SINE,
-		# Easing out means we start fast and slow down as we reach the target value.
-		tween.EASE_OUT
-	)
-	tween.start()
+func _input(event):
+	if event.is_action_pressed("MouseClick_Middle"):
+		_drag = true
+	elif event.is_action_released("MouseClick_Middle"):
+		_drag = false
+	elif event.is_action("Zoom_in"):
+		_update_zoom(-ZOOM_INCREMENT, get_local_mouse_position())
+	elif event.is_action("Zoom_out"):
+		_update_zoom(ZOOM_INCREMENT, get_local_mouse_position())
+	elif event is InputEventMouseMotion && _drag:
+		set_offset(get_offset() - event.relative*_current_zoom_level)
+		emit_signal("moved")
 
-func _unhandled_input(event):
-	if event.is_action_pressed("Zoom_in"):
-		# Inside a given class, we need to either write `self._zoom_level = ...` or explicitly
-		# call the setter function to use it.
-		_set_zoom_level(_zoom_level - zoom_factor)
-	if event.is_action_pressed("Zoom_out"):
-		_set_zoom_level(_zoom_level + zoom_factor)
-
-#-----------------------------
-#https://godotengine.org/qa/24969/how-to-drag-camera-with-mouse
-#func _input(event):
-#	if event.is_action("drag"):
-#		if event.is_pressed():
-#			mouse_start_pos = event.position
-#			screen_start_position = position
-#			dragging = true
-#		else:
-#			dragging = false
-#	elif event is InputEventMouseMotion and dragging:
-#		position = zoom * (mouse_start_pos - event.position) + screen_start_position
-
-#-------
-
-
+func _update_zoom(incr, zoom_anchor):
+	var old_zoom = _current_zoom_level
+	_current_zoom_level += incr
+	if _current_zoom_level < MAX_ZOOM_LEVEL:
+		_current_zoom_level = MAX_ZOOM_LEVEL
+	elif _current_zoom_level > MIN_ZOOM_LEVEL:
+		_current_zoom_level = MIN_ZOOM_LEVEL
+	if old_zoom == _current_zoom_level:
+		return
+	
+	var zoom_center = zoom_anchor - get_offset()
+	var ratio = 1-_current_zoom_level/old_zoom
+	set_offset(get_offset() + zoom_center*ratio)
+	
+	set_zoom(Vector2(_current_zoom_level, _current_zoom_level))
+	emit_signal("zoomed")

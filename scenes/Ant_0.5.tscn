@@ -36,7 +36,6 @@ animations = [ {
 } ]
 
 [node name="Ant" type="KinematicBody2D"]
-position = Vector2( 180, 100 )
 collision_mask = 2
 script = ExtResource( 3 )
 
