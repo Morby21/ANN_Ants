@@ -6,8 +6,12 @@ signal btn_KillAllAnts_pressed
 onready var GenCount_var = $MarginContainer/Top/Top_Left/Generation_Counter/Var
 onready var AntsSpawned_var = $MarginContainer/Top/Top_Left/Ants_Spawned/Var
 onready var AntsAlive_var = $MarginContainer/Top/Top_Left/Ants_Alive/Var
+onready var AntName_var = $MarginContainer/Top/Top_Left/Ant_Name/Var
+onready var AntMotivation_var = $MarginContainer/Top/Top_Left/Ant_Motivation/Var
+onready var LeftDayTime_var = $MarginContainer/Top/Top_Left/Left_DayTime/Var
 
 ### GUI - Top_Right ###########################################################
+onready var Btn_ToolSelection = $MarginContainer/Top/Top_Right/Btn_Tool_selection
 onready var Btn_TileSelection = $MarginContainer/Top/Top_Right/Btn_Tile_selection
 onready var Btn_LevelSelection = $MarginContainer/Top/Top_Right/Btn_Level_selection
 onready var Btn_KillAllAnts = $MarginContainer/Top/Top_Right/Btn_KillAllAnts
@@ -18,8 +22,45 @@ var spawned_ants_max
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	addItems_Btn_Tool_Selection(Btn_ToolSelection)
 	addItems_Btn_Tile_Selection(Btn_TileSelection)
 	addItems_Btn_Level_Selection(Btn_LevelSelection)
+
+
+func _on_Ants_Population_generation_count_label(gen_count):
+	GenCount_var.text = str(gen_count)
+
+
+func _on_Ants_Population_spawned_ants_label(spawned_ants):
+	AntsSpawned_var.text = str(spawned_ants, " / ", spawned_ants_max)
+
+
+func _on_Ants_Population_living_ants_label(living_ants):
+	AntsAlive_var.text = str(living_ants)
+
+
+func _on_Ant_ant_name_label(ant_name):
+	AntName_var.text = ant_name
+
+
+func _on_Ant_ant_motivation_label(ant_motivation):
+	if ant_motivation != 0:
+		AntMotivation_var.text = str(ant_motivation)
+	else:
+		AntMotivation_var.text = "/"
+
+
+func _on_Ants_Population_left_daytime_label(left_daytime):
+	LeftDayTime_var.text = str(left_daytime)
+
+
+func addItems_Btn_Tool_Selection(Btn):
+	Btn.add_item("Tools")
+	Btn.add_separator()
+	Btn.add_item("Selecting")
+	Btn.add_item("Dragging")
+func _on_Btn_Tool_selection_item_selected(index):
+	pass # Replace with function body.
 
 
 func addItems_Btn_Tile_Selection(Btn):
@@ -49,22 +90,6 @@ func _on_Btn_Level_selection_item_selected(index):
 		Global.goto_scene("res://scenes/Level_02_Training.tscn")
 
 
-func _on_Ants_World_generation_count_label(gen_count):
-	GenCount_var.text = str(gen_count)
-
-
-func _on_Ants_World_living_ants_label(living_ants):
-	AntsAlive_var.text = str(living_ants)
-
-
-func _on_Ants_World_spawned_ants_label(spawned_ants):
-	AntsSpawned_var.text = str(spawned_ants, " / ", spawned_ants_max)
-
-
-func _on_Ants_World_game_paused_byScript():
-	Btn_PauseContinue.text = "Continue"
-
-
 func _on_Btn_NextLevel_pressed():
 	pass #TODO delete Button
 
@@ -85,3 +110,11 @@ func _on_Btn_PauseContinue_pressed():
 	else:
 		Btn_PauseContinue.text = "Pause"
 		get_tree().paused = false
+
+
+
+#func _on_Ants_World_game_paused_byScript():
+#	Btn_PauseContinue.text = "Continue"
+
+
+

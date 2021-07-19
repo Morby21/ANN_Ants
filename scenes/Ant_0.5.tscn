@@ -63,4 +63,4 @@ enabled = true
 
 [node name="antennaes" type="Line2D" parent="."]
 visible = false
-points = PoolVector2Array( 35.3127, 70.0506, 0.294662, 34.2832, -35.295, 69.8633 )
+points = PoolVector2Array( 40.4997, 114.376, 0.294662, 34.2832, -40.4089, 115.5 )

@@ -1,9 +1,10 @@
 extends Node
 
 signal new_generation
-signal generation_count_label(gen_count)
+signal generation_count_label(generation_count)
 signal living_ants_label(a)
 signal spawned_ants_label(a)
+signal left_daytime_label(a)
 
 export var spawn_timer_value : int = 30
 
@@ -12,21 +13,29 @@ var spawn_timer : int
 var spawned_ants
 var living_ants
 var living_ants_old
-var gen_count = 0
-
+var generation_count = 0
+var max_life_timer : int = 0 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var GUI = get_parent().get_node("GUI")
-	connect("generation_count_label", GUI, "_on_Ants_World_generation_count_label")
-	connect("living_ants_label", GUI, "_on_Ants_World_living_ants_label")
-	connect("spawned_ants_label", GUI, "_on_Ants_World_spawned_ants_label")
+	connect("generation_count_label", GUI, "_on_Ants_Population_generation_count_label")
+	connect("living_ants_label", GUI, "_on_Ants_Population_living_ants_label")
+	connect("spawned_ants_label", GUI, "_on_Ants_Population_spawned_ants_label")
 	GUI.connect("btn_KillAllAnts_pressed", self, "_on_GUI_btn_KillAllAnts_pressed")
 	GUI.spawned_ants_max = $Population.size
+	connect("left_daytime_label", GUI, "_on_Ants_Population_left_daytime_label")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
+	if Global.Option_maxLifeTimer:
+		max_life_timer = max_life_timer + 1
+		emit_signal("left_daytime_label", Global.Option_value_maxLifeTimer - max_life_timer)
+		if max_life_timer == Global.Option_value_maxLifeTimer: #15000
+			_on_GUI_btn_KillAllAnts_pressed() #HACK implementr own killReason-index
+			max_life_timer = 0
+	
 	everybody_ready = true
 	for child in $Population.get_children():
 		if !child.get_is_ready():
@@ -37,19 +46,20 @@ func _physics_process(_delta):
 	print_population_status() # !Call before var everybody_ready is resetted
 	
 	if everybody_ready:
-		if gen_count > 5: #TODO: replace 5 with a variable
+		if generation_count > 5: #TODO: replace 5 with a variable
 			replace_stupid_ants()
 		emit_signal("new_generation")#TODO wo ging/ging das Signal mal hin?
 		$Population.next_generation()
-		gen_count = gen_count + 1
-		emit_signal("generation_count_label", gen_count)
+		generation_count = generation_count + 1
+		emit_signal("generation_count_label", generation_count)
 		spawn_timer = 0
 		for ant in $Population.get_children():
 			ant.reset()
 			#ant.respawn(spawn_timer)
 			ant.trigger_respawn(spawn_timer)
 			spawn_timer = spawn_timer + spawn_timer_value
-		tile_reset() 
+		tile_reset()
+		max_life_timer = 0 
 
 
 func tile_reset(): #TODO gehört eigentlich nicht in diese Scene.
@@ -74,6 +84,7 @@ func _on_GUI_btn_KillAllAnts_pressed():
 	for child in $Population.get_children():
 		child.killThisOrganism(4)
 	tile_reset() 
+	max_life_timer = 0
 
 
 func replace_stupid_ants():
@@ -90,11 +101,21 @@ func replace_stupid_ants():
 	for ant in stupid_ants:
 		var randomly_picked_smart_dna = smart_ants[randi() % smart_ants.size()]
 		ant.get_node("Organism").set_dna(randomly_picked_smart_dna)
+	print("Replaced stupid ants: ", stupid_ants.size()) #PRINT
 
 
+func get_all_ant_positions():
+	var all_positions = []
+	for child in $Population.get_children():
+		all_positions.append(child.get_ant_position())
+	return all_positions
 
 
+func selected_ant_position(population_child_index):
+	$Population.get_child(population_child_index).select_ant()
 
-
+func unselect_all_ants():
+	for child in $Population.get_children():
+		child.unselect_ant()
 
 

@@ -1,12 +1,16 @@
 extends KinematicBody2D
+
 class_name Ant
+
+signal ant_motivation_label(a)
+signal ant_name_label(a)
 
 var AntsTileMap
 
 export(Array, int, 1, 100) var hidden_layers_sizes:Array = [6, 3]
 
 var life_timer : int = 0 
-var max_life_timer : int = 0 
+#var max_life_timer : int = 0 
 var spawn_timer : int = 0
 var cycle_timer : int = 0 
 var cycle_left_timer : int = 0
@@ -19,6 +23,7 @@ var is_dead : bool = false #Ant isn't alive
 var is_ready:bool = false #Ant is finished learning and is ready for population
 var is_spawned:bool = true
 var is_selected: bool = false #Ant is selected by mouse-click
+var is_connected_to_GUI: bool = false
 
 onready var start_tile : Vector2 = get_parent().get_parent().get_parent().get_HivePosition() #ants starting position on tileMap
 
@@ -47,8 +52,11 @@ var input_count = 0
 
 var map_size = 5000 #HACK needs to be set to the actual map size 
 
+var GUI
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GUI = get_parent().get_parent().get_parent().get_node("GUI") #HACK implement Global GUI
 	ants_task = 1 #Set ants starting Task to SEARCHING
 	
 	### SetUp instance of Organism ############################################
@@ -86,6 +94,12 @@ func _ready():
 
 
 func _physics_process(_delta):
+	if is_selected:
+		if !is_connected_to_GUI:
+			connect("ant_name_label", GUI, "_on_Ant_ant_name_label")
+			connect("ant_motivation_label", GUI, "_on_Ant_ant_motivation_label")
+			is_connected_to_GUI = true
+	
 	AntsTileMap = get_parent().get_parent().get_parent().get_TileMap()
 	if spawn:
 		if spawn_timer == 0:
@@ -108,15 +122,17 @@ func _physics_process(_delta):
 		
 		if Global.Option_lifeTimer:
 			life_timer = life_timer + 1
+			if is_selected:
+				emit_signal("ant_motivation_label", Global.Option_value_lifeTimer - life_timer)
 			if life_timer == Global.Option_value_lifeTimer: #3000 #ants "standard" living-cycle (possible to be resetted for good work)
 				killThisOrganism(1)
 				life_timer = 0
-		
-		if Global.Option_maxLifeTimer:
-			max_life_timer = max_life_timer + 1
-			if max_life_timer == Global.Option_value_maxLifeTimer: #15000
-				killThisOrganism(1)
-				max_life_timer = 0
+
+#		if Global.Option_maxLifeTimer:
+#			max_life_timer = max_life_timer + 1
+#			if max_life_timer == Global.Option_value_maxLifeTimer: #15000
+#				killThisOrganism(1)
+#				max_life_timer = 0
 			
 		match ants_task:
 			1:  #SEARCH Searching for ... new Areas and Things
@@ -178,8 +194,9 @@ func scan_for_collision() -> void:
 	var antennae_right : float = normalizeDistance(rightCollisionDistance)
 	
 	if Global.Option_Input_CollisionDetection:
-		#print(leftCollisionDistance, " - ", rightCollisionDistance)
-		#print(antennae_left, " - ", antennae_right)
+#		if is_selected:
+#			print("CollisionDistance: ", leftCollisionDistance, " - ", rightCollisionDistance)
+#			print("Antennae: ", antennae_left, " - ", antennae_right)
 		inputs.insert(inputs.size(), antennae_left)
 		inputs.insert(inputs.size(), antennae_right)
 
@@ -194,7 +211,8 @@ func scan_for_tiles() -> void:
 	var normalizedTileIndex_rightAntennae  = normalizeTile(cell_index_rightAntennae)
 	
 	if Global.Option_Input_TileDetection:
-		#print(normalizedTileIndex_leftAntennae, " - ", normalizedTileIndex_rightAntennae)
+		if is_selected:
+			print("normalizedTileIndex_leftAntennae: ", normalizedTileIndex_leftAntennae, " - ", normalizedTileIndex_rightAntennae)
 		inputs.insert(inputs.size(), normalizedTileIndex_leftAntennae)
 		inputs.insert(inputs.size(), normalizedTileIndex_rightAntennae)
 	
@@ -202,7 +220,8 @@ func scan_for_tiles() -> void:
 func organism_IO():
 	var output:Array = [0]
 	output = $Organism.think(inputs)
-	#print("PUTPUT", output)
+#	if is_selected:
+#		print("Output: ", output)
 	if output[0] > 0.5:
 		steer_left()
 	elif output[0] < -0.5:
@@ -253,6 +272,10 @@ func get_is_spawned() -> bool:
 	return is_spawned
 
 
+func get_ant_position():
+	return self.position
+
+
 func reset() -> void:
 #	var min_rotation = 0
 #	var max_rotation = 359
@@ -278,7 +301,7 @@ func trigger_respawn(given_spawn_timer) -> void:
 
 func killThisOrganism(kill_reason:int) -> void:
 	$AnimatedSprite.stop()
-	if false: #var == true:
+	if is_selected: 
 		if kill_reason == 0:
 			print(self.name, " just initial-kill, to force spawn countdown. (Fitness: ", $Organism.get_fitness(),")") #HACK Man könnte sie auch am Anfang gleich tot spawnen lassen, um ein unnötiges new_generation zu vermeiden!
 		if kill_reason == 1:
@@ -317,6 +340,23 @@ func normalizeRotation(ants_rotation : float) -> float:
 	if ants_rotation >= 361:
 		return 1.0
 	return ants_rotation / 361
+
+
+func select_ant():
+	$AnimatedSprite.modulate = Color(255, 255, 0, 255)
+	emit_signal("ant_name_label", self.name)
+	is_connected_to_GUI = false
+	is_selected = true
+
+
+
+
+func unselect_ant():
+	$AnimatedSprite.modulate = Color(1, 1, 1, 1)
+	emit_signal("ant_name_label", "/")
+	emit_signal("ant_motivation_label", 0)
+	is_selected = false
+
 
 
 #-------------------------------------------------------------------------------

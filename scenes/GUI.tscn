@@ -29,7 +29,7 @@ margin_right = 1366.0
 margin_bottom = 36.0
 
 [node name="Top_Left" type="HBoxContainer" parent="MarginContainer/Top"]
-margin_right = 346.0
+margin_right = 679.0
 margin_bottom = 36.0
 
 [node name="Generation_Counter" type="VBoxContainer" parent="MarginContainer/Top/Top_Left"]
@@ -108,33 +108,124 @@ margin_bottom = 36.0
 text = "/"
 align = 1
 
-[node name="EXPAND_Vertical" type="MarginContainer" parent="MarginContainer/Top"]
+[node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/Top/Top_Left"]
 margin_left = 350.0
-margin_right = 914.0
+margin_right = 370.0
+margin_bottom = 36.0
+custom_constants/margin_right = 10
+custom_constants/margin_left = 10
+
+[node name="Left_DayTime" type="VBoxContainer" parent="MarginContainer/Top/Top_Left"]
+margin_left = 374.0
+margin_right = 458.0
+margin_bottom = 36.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/Top/Top_Left/Left_DayTime"]
+margin_right = 84.0
+
+[node name="Label" type="Label" parent="MarginContainer/Top/Top_Left/Left_DayTime"]
+margin_top = 4.0
+margin_right = 84.0
+margin_bottom = 18.0
+text = "Left daytime:"
+
+[node name="Var" type="Label" parent="MarginContainer/Top/Top_Left/Left_DayTime"]
+margin_top = 22.0
+margin_right = 84.0
+margin_bottom = 36.0
+text = "/"
+align = 1
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/Top/Top_Left"]
+margin_left = 462.0
+margin_right = 482.0
+margin_bottom = 36.0
+custom_constants/margin_right = 10
+custom_constants/margin_left = 10
+
+[node name="Ant_Name" type="VBoxContainer" parent="MarginContainer/Top/Top_Left"]
+margin_left = 486.0
+margin_right = 552.0
+margin_bottom = 36.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/Top/Top_Left/Ant_Name"]
+margin_right = 66.0
+
+[node name="Label" type="Label" parent="MarginContainer/Top/Top_Left/Ant_Name"]
+margin_top = 4.0
+margin_right = 66.0
+margin_bottom = 18.0
+text = "Ant name:"
+
+[node name="Var" type="Label" parent="MarginContainer/Top/Top_Left/Ant_Name"]
+margin_top = 22.0
+margin_right = 66.0
+margin_bottom = 36.0
+text = "/"
+align = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/Top/Top_Left"]
+margin_left = 556.0
+margin_right = 576.0
+margin_bottom = 36.0
+custom_constants/margin_right = 10
+custom_constants/margin_left = 10
+
+[node name="Ant_Motivation" type="VBoxContainer" parent="MarginContainer/Top/Top_Left"]
+margin_left = 580.0
+margin_right = 679.0
+margin_bottom = 36.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/Top/Top_Left/Ant_Motivation"]
+margin_right = 99.0
+
+[node name="Label" type="Label" parent="MarginContainer/Top/Top_Left/Ant_Motivation"]
+margin_top = 4.0
+margin_right = 99.0
+margin_bottom = 18.0
+text = "Ant motivation:"
+
+[node name="Var" type="Label" parent="MarginContainer/Top/Top_Left/Ant_Motivation"]
+margin_top = 22.0
+margin_right = 99.0
+margin_bottom = 36.0
+text = "/"
+align = 1
+
+[node name="EXPAND_Vertical" type="MarginContainer" parent="MarginContainer/Top"]
+margin_left = 683.0
+margin_right = 781.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
 
 [node name="Top_Right" type="HBoxContainer" parent="MarginContainer/Top"]
-margin_left = 918.0
+margin_left = 785.0
 margin_right = 1366.0
 margin_bottom = 36.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Btn_Tile_selection" type="OptionButton" parent="MarginContainer/Top/Top_Right"]
-margin_right = 29.0
+[node name="Btn_Tool_selection" type="OptionButton" parent="MarginContainer/Top/Top_Right"]
+margin_right = 63.0
 margin_bottom = 36.0
+text = "Tools"
+
+[node name="Btn_Tile_selection" type="OptionButton" parent="MarginContainer/Top/Top_Right"]
+margin_left = 67.0
+margin_right = 162.0
+margin_bottom = 36.0
+text = "Select Tile"
 
 [node name="Btn_Level_selection" type="OptionButton" parent="MarginContainer/Top/Top_Right"]
-margin_left = 33.0
-margin_right = 139.0
+margin_left = 166.0
+margin_right = 272.0
 margin_bottom = 36.0
 text = "Select Level"
 
 [node name="Btn_NextLevel" type="Button" parent="MarginContainer/Top/Top_Right"]
-margin_left = 143.0
-margin_right = 223.0
+margin_left = 276.0
+margin_right = 356.0
 margin_bottom = 36.0
 size_flags_vertical = 3
 text = "Next Level"
@@ -143,26 +234,27 @@ __meta__ = {
 }
 
 [node name="Btn_KillAllAnts" type="Button" parent="MarginContainer/Top/Top_Right"]
-margin_left = 227.0
-margin_right = 342.0
+margin_left = 360.0
+margin_right = 475.0
 margin_bottom = 36.0
 size_flags_vertical = 3
 text = "New Generation"
 
 [node name="Btn_PauseContinue" type="Button" parent="MarginContainer/Top/Top_Right"]
-margin_left = 346.0
-margin_right = 396.0
+margin_left = 479.0
+margin_right = 529.0
 margin_bottom = 36.0
 size_flags_vertical = 3
 text = "Pause"
 
 [node name="Btn_Menu" type="Button" parent="MarginContainer/Top/Top_Right"]
-margin_left = 400.0
-margin_right = 448.0
+margin_left = 533.0
+margin_right = 581.0
 margin_bottom = 36.0
 size_flags_vertical = 3
 text = "Menu"
 
+[connection signal="item_selected" from="MarginContainer/Top/Top_Right/Btn_Tool_selection" to="." method="_on_Btn_Tool_selection2_item_selected"]
 [connection signal="item_selected" from="MarginContainer/Top/Top_Right/Btn_Tile_selection" to="." method="_on_Btn_Tile_selection_item_selected"]
 [connection signal="item_selected" from="MarginContainer/Top/Top_Right/Btn_Level_selection" to="." method="_on_Btn_Level_selection_item_selected"]
 [connection signal="pressed" from="MarginContainer/Top/Top_Right/Btn_NextLevel" to="." method="_on_Btn_NextLevel_pressed"]
