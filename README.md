@@ -7,10 +7,10 @@ At the beginning the A.N.N. knows nothing about anything, but it will train itse
   
   
 # Play latest release Online
-Release info: https://github.com/Morby21/ANN_Ants/releases  
-itch.io: https://morby21.itch.io/ann-ants  
+Play on itch.io: https://morby21.itch.io/ann-ants  
 Password: Morby21  
-
+Release info: https://github.com/Morby21/ANN_Ants/releases  
+  
 It's not public and with a password, because it's a Alpha "pre-pre-release".  
 Only to demonstrate, no functional "game" content.  
   
@@ -25,7 +25,6 @@ AI-Racing by `zwometer`: https://zwometer.itch.io/ai-racing
 Godot License: https://godotengine.org/license  
   
 <b>CODE</b>  
-General coding support by `zwometer`: https://github.com/zwometer  
 The Artificial Neural Network by `leopnt`: https://github.com/leopnt/neft_godot  
 Camera2D zoom-script by`Olivier Boucard`: https://www.braindead.bzh/entry/godot-interactive-camera2d  
   
