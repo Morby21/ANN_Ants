@@ -1,6 +1,14 @@
 # ANN Ants
 `Artificial Neural Network` - Ants - Game
 
+# Play latest release Online
+Release info: https://github.com/Morby21/ANN_Ants/releases  
+itch.io: https://morby21.itch.io/ann-ants  
+Password: Morby21  
+
+It's not public and with a password, because it's a Alpha "pre-pre-release".  
+Only to demonstrate, no functional "game" content.  
+
 # Sources
 <b>IDE</b>  
 Godot License: https://godotengine.org/license  
