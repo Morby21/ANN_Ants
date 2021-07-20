@@ -36,6 +36,7 @@ animations = [ {
 } ]
 
 [node name="Ant" type="KinematicBody2D"]
+collision_layer = 4
 collision_mask = 2
 script = ExtResource( 3 )
 
@@ -55,11 +56,13 @@ frame = 1
 position = Vector2( 0, 35 )
 rotation = -0.785398
 enabled = true
+cast_to = Vector2( 0, 500 )
 
 [node name="antennae_right" type="RayCast2D" parent="."]
 position = Vector2( 0, 35 )
 rotation = 0.785398
 enabled = true
+cast_to = Vector2( 0, 500 )
 
 [node name="antennaes" type="Line2D" parent="."]
 visible = false

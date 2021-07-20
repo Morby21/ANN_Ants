@@ -98,6 +98,7 @@ func _ready():
 
 
 func _physics_process(_delta):
+	update() #HACK
 	if is_selected:
 		if !is_connected_to_GUI:
 			connect("ant_name_label", GUI, "_on_Ant_ant_name_label")
@@ -206,7 +207,8 @@ func scan_for_collision() -> void:
 	
 	if Global.Option_Input_CollisionDetection:
 		if is_selected:
-			#print(leftCollisionDistance, " / ", rightCollisionDistance) 
+			print(leftCollisionDistance, " / ", rightCollisionDistance) 
+			#print(leftCollisionPoint, " / ", rightCollisionPoint)
 			emit_signal("collision_detection_label", antennae_left, antennae_right)
 		inputs.insert(inputs.size(), antennae_left) #FIXME !!!!! seems that the collision detection doesn't point in right direction.
 		inputs.insert(inputs.size(), antennae_right)
@@ -336,7 +338,7 @@ func killThisOrganism(kill_reason:int) -> void:
 	
 	
 func normalizeDistance(distanceToNormalize : float) -> float:
-	if distanceToNormalize > 1000: #FIXME
+	if distanceToNormalize > 1000:
 		return 1.0
 	return distanceToNormalize / 1000
 
@@ -373,6 +375,20 @@ func unselect_ant():
 	is_selected = false
 
 
+func _draw():
+	if is_selected:
+		if $antennae_left.is_colliding():
+			draw_circle(to_local($antennae_left.get_collision_point()), 100, Color.red)
+			draw_line(to_local($antennae_left.get_collision_point()), Vector2.ZERO, Color.red, 4)
+		if $antennae_right.is_colliding():
+			draw_circle(to_local($antennae_right.get_collision_point()), 100, Color.blue)
+			draw_line(to_local($antennae_right.get_collision_point()), Vector2.ZERO, Color.blue, 4)
+		
+		
+		draw_circle(to_local(AntsTileMap.map_to_world(AntsTileMap.world_to_map($antennaes.points[0]))), 10, Color.green)
+		print(AntsTileMap.world_to_map(to_local($antennaes.points[0])))
+		draw_circle(AntsTileMap.world_to_map($antennaes.points[2]*100), 10, Color.purple)
+		draw_circle(to_local(Vector2.ZERO), 100, Color.chartreuse)
 
 #-------------------------------------------------------------------------------
 #In the object's code that you want to train, update the fitness with the methods of Organism
