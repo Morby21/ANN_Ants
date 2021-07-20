@@ -21,7 +21,7 @@ var max_life_timer : int = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var GUI = get_parent().get_node("GUI")
+	var GUI = get_parent().get_node("GUI") #TODO make it Global
 	connect("ant_is_selected", GUI, "_on_Ants_Population_AntIsSelected")
 	connect("no_ant_is_selected", GUI, "_on_Ants_Population_noAntIsSelected")
 	connect("generation_count_label", GUI, "_on_Ants_Population_generation_count_label")
@@ -38,7 +38,7 @@ func _physics_process(_delta):
 		max_life_timer = max_life_timer + 1
 		emit_signal("left_daytime_label", Global.Option_value_maxLifeTimer - max_life_timer)
 		if max_life_timer == Global.Option_value_maxLifeTimer: #15000
-			_on_GUI_btn_KillAllAnts_pressed() #HACK implementr own killReason-index
+			KillAllAnts_by_reason(6)
 			max_life_timer = 0
 	
 	everybody_ready = true
@@ -60,7 +60,6 @@ func _physics_process(_delta):
 		spawn_timer = 0
 		for ant in $Population.get_children():
 			ant.reset()
-			#ant.respawn(spawn_timer)
 			ant.trigger_respawn(spawn_timer)
 			spawn_timer = spawn_timer + spawn_timer_value
 		tile_reset()
@@ -86,8 +85,16 @@ func print_population_status():
 
 
 func _on_GUI_btn_KillAllAnts_pressed():
+	KillAllAnts_by_reason(4)
+
+
+func new_level_started():
+	KillAllAnts_by_reason(7)
+
+
+func KillAllAnts_by_reason(reason):
 	for child in $Population.get_children():
-		child.killThisOrganism(4)
+		child.killThisOrganism(reason)
 	tile_reset() 
 	max_life_timer = 0
 
@@ -105,7 +112,7 @@ func replace_stupid_ants():
 			smart_ants.append(child)
 	for ant in stupid_ants:
 		var randomly_picked_smart_dna = smart_ants[randi() % smart_ants.size()]
-		ant.get_node("Organism").set_dna(randomly_picked_smart_dna)
+		ant.get_node("Organism").set_dna(randomly_picked_smart_dna) #FIXME crashed game at organism.gd:40 - at function:set_dna {ERROR: Ivalid call.Nonexistent function 'get_genes' in base 'Nil'.}
 	print("Replaced stupid ants: ", stupid_ants.size()) #PRINT
 
 

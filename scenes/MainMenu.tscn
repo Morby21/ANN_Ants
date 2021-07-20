@@ -124,16 +124,16 @@ margin_bottom = 365.0
 mouse_filter = 0
 text = "Exit"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
+[node name="Version" type="HBoxContainer" parent="HBoxContainer/VBoxContainer"]
 margin_top = 625.0
 margin_right = 551.0
 margin_bottom = 647.0
 theme = SubResource( 6 )
 
-[node name="version" type="Label" parent="HBoxContainer/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer/Version"]
 margin_right = 146.0
 margin_bottom = 22.0
-text = "Version  0.1.1"
+text = "Version  x.x.x"
 __meta__ = {
 "_edit_use_anchors_": false
 }

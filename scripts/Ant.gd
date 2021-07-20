@@ -206,8 +206,9 @@ func scan_for_collision() -> void:
 	
 	if Global.Option_Input_CollisionDetection:
 		if is_selected:
+			#print(leftCollisionDistance, " / ", rightCollisionDistance) 
 			emit_signal("collision_detection_label", antennae_left, antennae_right)
-		inputs.insert(inputs.size(), antennae_left)
+		inputs.insert(inputs.size(), antennae_left) #FIXME !!!!! seems that the collision detection doesn't point in right direction.
 		inputs.insert(inputs.size(), antennae_right)
 
 
@@ -324,6 +325,10 @@ func killThisOrganism(kill_reason:int) -> void:
 			print(self.name, " by Button. (Fitness: ", $Organism.get_fitness(),")") #FIXME Killbutton killt nicht zuverlässig
 		elif kill_reason == 5:
 			print(self.name, " has killed for not Moving. (Fitness: ", $Organism.get_fitness(),")")
+		elif kill_reason == 6:
+			print(self.name, " has killed by Daytime. (Fitness: ", $Organism.get_fitness(),")")
+		elif kill_reason == 7:
+			print(self.name, " has killed by changing Level. (Fitness: ", $Organism.get_fitness(),")")
 	is_ready = true
 	is_dead = true
 	visible = false
@@ -331,9 +336,9 @@ func killThisOrganism(kill_reason:int) -> void:
 	
 	
 func normalizeDistance(distanceToNormalize : float) -> float:
-	if distanceToNormalize > 4000: #FIXME
+	if distanceToNormalize > 1000: #FIXME
 		return 1.0
-	return distanceToNormalize / 4000
+	return distanceToNormalize / 1000
 
 
 func normalizeTile(tile_index : float) -> float:

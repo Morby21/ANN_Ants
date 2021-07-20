@@ -2,6 +2,7 @@ extends Node
 
 ### Global variables ##########################################################
 #-- General -------------------------------------------------------------------
+var version_number = "0.3.0-alpha"
 var selected_tile: int
 var tool_is_selecting: bool = false
 var tool_is_dragging: bool = false
@@ -10,7 +11,7 @@ var tool_is_dragging: bool = false
 var population_size
 
 #-- MainMenu-Options (and its Standard values)---------------------------------
-var Option_population_size = 20
+var Option_population_size = 50
 var Option_Input_DistanceToNest = true
 var Option_Input_Rotation = true
 var Option_Input_Coordinations = true
@@ -82,7 +83,7 @@ func NewGame_pressed():
 	Ants_Population_Instance.get_child(0).size = Option_population_size
 	#TODO Hiddenlayers
 	Ants_Population_Instance.get_child(0).organism_parent_scene = Ant_Individium
-	goto_scene("res://scenes/Level_01_Standard.tscn")
+	goto_scene("res://scenes/Level_01_Train_Tiles.tscn")
 	MainMenu.queue_free()
 
 

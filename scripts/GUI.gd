@@ -89,15 +89,16 @@ func _on_Btn_Tile_selection_item_selected(index):
 
 
 func addItems_Btn_Level_Selection(Btn):
-	Btn.add_item("Standard Level")
-	Btn.add_separator()
-	Btn.add_item("Training 1: Collision")
-	Btn.add_item("Training 2: Search new Tiles")
+	Btn.add_item("Training 1: collision")
+	Btn.add_item("Training 2: new tiles")
+	Btn.add_item("Training 3: follow trail")
 func _on_Btn_Level_selection_item_selected(index):
 	if index == 0:
-		Global.goto_scene("res://scenes/Level_01_Standard.tscn")
+		Global.goto_scene("res://scenes/Level_01_Train_Tiles.tscn")
+	if index == 1:
+		Global.goto_scene("res://scenes/Level_02_Train_Trail.tscn")
 	if index == 2:
-		Global.goto_scene("res://scenes/Level_02_Training.tscn")
+		Global.goto_scene("res://scenes/Level_03_Train_Collision.tscn")
 
 
 func _on_Btn_NextLevel_pressed():
@@ -146,6 +147,6 @@ func _on_Ant_collision_detection_label(collision_detect_left, collision_detect_r
 
 
 func _on_Ant_distance_to_home_label(distance):
-	DistanceToHome_var.text = str(stepify(distance, 0.1))
+	DistanceToHome_var.text = str(stepify(distance, 0.01))
 
 

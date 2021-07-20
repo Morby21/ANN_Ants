@@ -1,19 +1,16 @@
 extends MarginContainer
 
-#signal MainMenu_Continue_pressed
-#signal MainMenu_NewGame_pressed
-
 var mouseOn_Continue = false
 var mouseOn_NewGame = false
 var mouseOn_Options = false
 var mouseOn_Exit = false
+var is_options = false
 
-var is_options
-#test
 ### Menu - Backbone ###########################################################
 onready var Btn_Continue = $HBoxContainer/VBoxContainer/MenuOptions/Continue
 onready var options_container = $HBoxContainer/CenterContainer_Options
 onready var noOptions_container = $HBoxContainer/CenterContainer_noOptions
+onready var Version_label = $HBoxContainer/VBoxContainer/Version/Label
 
 ### Options - Backbone ########################################################
 onready var Option_population_size = $HBoxContainer/CenterContainer_Options/Option_List/Option_population_size/LineEdit
@@ -48,6 +45,9 @@ func _ready():
 	#Continue-Button show/hide
 	if Global.current_scene != null:
 		Btn_Continue.show()
+	
+	#Setup the Version number
+	Version_label.text = str("Version ", Global.version_number)
 
 
 func saveOptions_on_NewGameBtn():
